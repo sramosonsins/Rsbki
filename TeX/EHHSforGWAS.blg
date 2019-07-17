@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: EHHSforGWAS.aux
+The style file: genetics.bst
+Database file #1: EHHGWAS.bib
+You've used 2 entries,
+            2828 wiz_defined-function locations,
+            600 strings with 5212 characters,
+and the built_in function-call counts, 1647 in all, are:
+= -- 123
+> -- 106
+< -- 0
++ -- 52
+- -- 27
+* -- 155
+:= -- 232
+add.period$ -- 4
+call.type$ -- 2
+change.case$ -- 18
+chr.to.int$ -- 2
+cite$ -- 2
+duplicate$ -- 121
+empty$ -- 107
+format.name$ -- 33
+if$ -- 325
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 21
+newline$ -- 12
+num.names$ -- 8
+pop$ -- 43
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 59
+stack$ -- 0
+substring$ -- 51
+swap$ -- 72
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 18
+warning$ -- 0
+while$ -- 8
+width$ -- 0
+write$ -- 27

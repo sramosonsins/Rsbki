@@ -1,0 +1,18 @@
+\begin{thebibliography}{2}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{\sc Sabeti} {\em et~al.\/}(2002){\sc Sabeti}, {\sc Reich}, {\sc
+  Higgins}, {\sc Levine}, {\sc Richter} {\em et~al.\/}}]{Sabeti:2002fv}
+{\sc Sabeti, P.~C.}, {\sc D.~E. Reich}, {\sc J.~M. Higgins}, {\sc H.~Z.~P.
+  Levine}, {\sc D.~J. Richter}, {\em et~al.\/}, 2002 Detecting recent positive
+  selection in the human genome from haplotype structure.
+\newblock Nature {\bf 419}: 832--7.
+
+\bibitem[{{\sc Tang} {\em et~al.\/}(2007){\sc Tang}, {\sc Thornton} and {\sc
+  Stoneking}}]{Tang:2007by}
+{\sc Tang, K.}, {\sc K.~R. Thornton}, and {\sc M.~Stoneking}, 2007 A new
+  approach for using genome scans to detect recent positive selection in the
+  human genome.
+\newblock PLoS Biol {\bf 5}: e171.
+
+\end{thebibliography}

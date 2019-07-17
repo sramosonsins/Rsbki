@@ -1,0 +1,4 @@
+#To compile:
+#enter into the source folder and type:
+
+gcc *.c -lm -o Tang_stats_plus -O· -Wall

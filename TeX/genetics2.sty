@@ -1,0 +1,25 @@
+%
+%  Redefinitions to Genetics style (works only under latex 2e)
+%
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\reset@font\centering\large\MakeUppercase}}
+\renewcommand\subsection[1]{{\par\noindent\normalfont\normalsize\bfseries#1}:}
+\renewcommand\subsubsection[1]{{\par\noindent\normalfont\normalsize\itshape#1}:}
+%\renewcommand\subsection{\@startsection{paragraph}{4}{\z@}%
+%                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+%                                     {-.55em \@plus -.2em}%
+%                                     {\normalfont\normalsize\bfseries}}
+%\renewcommand\subsubsection{\@startsection{paragraph}{4}{\z@}%
+%                                    {3.25ex \@plus1ex \@minus.2ex}%
+%                                    {-1em}%
+%                                    {\normalfont\normalsize\itshape}}
+\renewcommand\paragraph{\@startsection{subparagraph}{5}{\parindent}%
+                                       {3.25ex \@plus1ex \@minus .2ex}%
+                                       {-1em}%
+                                      {\normalfont\normalsize\bfseries}}
+\setcounter{secnumdepth}{-1}
+\renewcommand\refname{Literature Cited}
+\setlength\bibsep{0pt}
+

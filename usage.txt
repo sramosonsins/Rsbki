@@ -1,0 +1,9 @@
+Software for calculating iES plus Rsb and iESk plus Rsbk (per individual) statistics following Tang, Thornton & Stoneking, PloS Biology 2007.
+by Sebastian E. Ramos-Onsins
+
+Usage:
+Tang_stats_plus [Plink-like filename] [number of rows] [number of individuals] [threshold value] [seed] [number pops] [number of target pop -starting from 1 (0 if unused)] [col pop1] [col pop2] ... [col pop N]
+
+Otput file is automatically generated with the input filename plus '_Results_Tang.txt' + other files associated to the target population
+
+Note: The analysis uses unphased data. That is, the results obtained using the unphosed data are based on the observed homozygosity per individual. The results can be very different that using haplotypes (phased data), which uses the expected homozygosity assuming panmixia (you can uses the R library "rehh" to perform analysis with phased data for iEX and Rsb statistic).
