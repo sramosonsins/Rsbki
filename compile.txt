@@ -3,5 +3,5 @@
 set -x
 
 cd ./source
-gcc *.c -lm -o Tang_stats_plus -O -Wall
+gcc *.c -lm -o ../bin/Tang_stats_plus -O -Wall
 cd ..

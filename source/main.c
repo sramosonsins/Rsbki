@@ -230,6 +230,7 @@ int main(int arg, const char *argv[])
             l++;
         }
     }
+    free(med);
     // mean, sd ...
     l=0;
     for(j=0;j<npops-1;j++) {
@@ -371,6 +372,20 @@ int main(int arg, const char *argv[])
         }
     }
     
+    //freed
+    for(j=0;j<popsize[popn_target];j++) {
+         for(i=0;i<popsize[popn_target];i++) {
+            free(pop_Rsbk[j][i]);
+         }
+        free(pop_Rsbk[j]);
+    }
+    free(pop_Rsbk);
+    for(i=0;i<npops*(npops-1)/2;i++) {free(all_Rsb[i]);}
+    free(all_Rsb);
+    for(i=0;i<npops;i++) {free(all_iES[i]);}
+    free(all_iES);
+    for(j=0;j<N;j++) {free(geno[j]);}
+    free(geno);
     printf("\ndone\n");
     exit(0);
 }
