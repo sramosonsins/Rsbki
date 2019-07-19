@@ -88,14 +88,16 @@ Rsb_{k,i} = \frac{iES_{k,i}}{iES_{i}^{popRef}}
 where $\sum_{k=0}^{k=n}Rsb_{k,i} = Rsb_i.$
 
 \subsection{The study of association phenotype-genotype and the information related to the homogeneity of individuals in neighbouring regions}
-To perform a study of association genotype-phenotype, we can include the information provided by the statistic $iES_{k,i}$ and $Rsb_{k,i}$ in two different ways: (a) by adding the matrix $iES$ (or $Rsbi$) as a new random factor or (b) using this matrix as a ponderation of the genotype matrix. The two approaches have different meanings and thus different interpretations. In the first case, it is assumed that the homogeneity along the contiguous regions of a position  in a given individual has the same importance than the genotype of this individual, which suggest that regions close to the causal position (not necessarily causal) would be associated. In the second case, the method would stress only those genotypes with an associated phenotype that additionally would have strong ponderation (large homogeneity in the surrounding region). 
+To perform a study of association genotype-phenotype, we can include the information provided by the statistic $iES_{k,i}$ and $Rsb_{k,i}$ in two different ways: (a) by adding the matrix $iES$ (or $Rsbi$) in replacement of the genotype matrix or (b) using this matrix as a ponderation of the genotype matrix. %The two approaches have different meanings and thus different interpretations. In the first case, it is assumed that the homogeneity along the contiguous regions of a position  in a given individual has the same importance than the genotype of this individual, which suggest that regions close to the causal position (not necessarily causal) would be associated. In the second case, the method would stress only those genotypes with an associated phenotype that additionally would have strong ponderation (large homogeneity in the surrounding region). 
 
-A mixed model is used for relating the phenotype of each individual (a vector $y$ of phenotypes) with the genetic features of the individual at each position (that is, a vector $g$ containing the genotypes and the homogeneity versus surrounding positions). For each SNP we relate the phenotype using this general expression:
+%A mixed model is used for relating the phenotype of each individual (a vector $y$ of phenotypes) with the genetic features of the individual at each position (that is, a vector $g$ containing the genotypes and the homogeneity versus surrounding positions). For each SNP we relate the phenotype using this general expression:
 
- \begin{equation}
-y = Xb + Zg + e ,
- \end{equation}
-where $X$ is a matrix that relates the observed with the parameters for fixed effects defined in the $b$ vector and $Z$ is a matrix that relates the observed data with the parameters related to the genotype data. $e$ is the residual error. DEFINE ASSUMPTIONS, DISTRIBUTIONS  AND SCENARIOS.
+% \begin{equation}
+%y = Xb + Zg + e ,
+% \end{equation}
+%where $X$ is a matrix that relates the observed with the parameters for fixed effects defined in the $b$ vector and $Z$ is a matrix that relates the observed data with the parameters related to the genotype data. $e$ is the residual error. DEFINE ASSUMPTIONS, DISTRIBUTIONS  AND SCENARIOS.
+
+\noindent The proposal is to chose the SNPs with higher $iES$ per position (or $Rsb$ in case having a reference population) and use  these candidate positions for studying the association with the phenotype using the $iES_k$  (or $Rsb_k$) matrix.
 
 \section{Results}
 \subsection{Simulation of data under different scenarios and Validation}
