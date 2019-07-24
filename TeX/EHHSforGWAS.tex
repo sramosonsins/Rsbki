@@ -41,8 +41,38 @@ The GWAS analysis with a single panmictic population is based on the association
 The resolution of this k,ind of statistics is expected to be in the range of the domestication process (not too short, approximately from several hundreds of generations to  thousands of generations, REFERENCE). This range may allow to detect critical traits and the effect of these traits on the genome under crucial events such as the domestication.
 
 \section{Methods}
+\subsection{Considering a single population and polarized alleles (ancestral and derived)}
+Following \cite{Sabeti:2002fv}, we define the statistic $EHH_d$ as the proportion of homozygote individuals of the derived allele from position $i$ (the target position) to position $j$, in relation to the number of homozygote derived individuals at the position $i$.  That is:
+
+ \begin{equation}
+ EHH_{d_{ij}} = \frac{\sum_{k=1}^{n}I_{d_{k,ij}}}{\sum_{l_d=1}^{n}I_{d_{l,i}}},
+ \end{equation}
+where $n$ is the number of individual samples, and $I_{d_{k,ij}}$ counts 1 if the individual $k$ is homozygote for derived variant at position $i$ and is homozygote from position $i$ to $j$, otherwise counts 0. In the same way, $I_{d_{l,i}}$ counts 1 if the individual $l$ is homozygote for derived at position $i$, otherwise counts 0. The statistic $EHH_a$ is is calculated in the same way than $EHH_d$ but considering ancestral variant instead of derived variant.  
+
+In order to quantify the effect of the neighbouring homozygosity at a given studied position ($i$),  all values for $EHHS_{ij}$ are summed from  the position $i$,to their right and and their left sides, all the contributions of $EHHS_{ij}$, considering their distance (physical or recombinant), and until a threshold arbitrary value of $EHHS_{ij}$ (let's say 0.1). That is: 
+
+\begin{equation}
+ iES_{d_i} = \sum_{j=x+1}^{y}\frac{(EHHS_{d_{ij-1}} + EHH_{d_{ij})}}{2} (Pos_{j} - Pos_{j-1}),
+ \end{equation}
+where $x$ and $y$ are the positions (at the right and at the left) where $EHHS_{d_{ij}}$ becomes bellow the threshold or it is too far (by the presence of large gaps) from the central position (so the area out of $x$ and $y$ is considered unimportant), where $Pos$ may be the physical or the recombinant position (from a linkage map). The same is for the ancestral statistic ($iES_{a_i}$).
+
+The integrated relative Extended homozygosity statistic is then calculated as:
+ \begin{equation}
+ iES_{da_{i}} = \frac{iES_{d_{i}}} {iES_{a_{i}}}.
+ \end{equation}
+A value higher than 1 (if the genotype extension statistic for derived variants is larger than for ancestral variants) suggest the effect of positive selection favouring a derived variant at position $i$.  
+
+\subsubsection{Quantifying homogeneity at each position and individual}
+In case of doing a GWAS analysis, usually each position is evaluated independently in relation to the phenotype. That means that it is crucial to distinguish the genetic information between individuals at this position. Here we propose to include the information concerning to the homogeneity of the individual at neighbouring regions from the focus position (that is, a way to consider the linkage disequilibrium between the two chromosome copies of an individual at this region) in addition to the genotype at the focus position. That is, it is calculated a new statistic related to the neighbouring homogeneity for every position and individual. This statistic is obtained by slicing the $iES_{da_i}$ statistic given the contribution of each individual to the total:
+
+ \begin{equation}
+ iES_{da_{k,i}} = \sum_{j=x+1}^{y} ({\frac{I_{d_{k,ij-1}}+ I_{d_{k,ij}}} {\sum_{l=1}^{n}I_{d_{l,i}}}}) / ({\frac{I_{a_{k,ij-1}}+ I_{a_{k,ij}}} {\sum_{l=1}^{n}I_{a_{l,i}}}})
+ \end{equation}
+where $x$ and $y$ are the positions (at the right and at the left boundaries).
+
+\subsection{Contrasting a population against a reference population}
 Here, we will use the framework developed by \cite{Tang:2007by} to study the degree of homogenization of a given position (using unphased genotype information).
-\subsection{Define candidate positions}
+\subsubsection{Define candidate positions}
  In a first step, it is useful to define those candidate positions in relation to their maximum local extension of their homozygosity. This step is optional, as other criteria for defining candidate positions can be used. Following \cite{Tang:2007by}, we define $EHHS_{ij}$ as the proportion of homozygote individuals from position $i$ (the position of interest) to position $j$, in relation to the number of homozygote individuals at the position $i$. That is:
  
  \begin{equation}
@@ -53,34 +83,33 @@ where $n$ is the number of individual samples, and $I_{k,ij}$ counts 1 if the in
 The following calculation of the $iES_i$ statistic pretends to quantify the effect of the neighbouring homozygosity at a given studied position. Having all values for $EHHS_{ij}$, we count the total area of homozigosity around the position $i$, that is, having the position $i$ as the center, we sum, at their right and and their left, all the contributions of $EHHS_{ij}$, considering their distance (physical or recombinant). that is: 
 
  \begin{equation}
- iES_i = \sum_{j=a+1}^{b}\frac{(EHHS_{ij-1} + EHHS_{ij})}{2} (Pos_{j} - Pos_{j-1}),
+ iES_i = \sum_{j=x+1}^{y}\frac{(EHHS_{ij-1} + EHHS_{ij})}{2} (Pos_{j} - Pos_{j-1}),
  \end{equation}
-where $a$ and $b$ are the positions (at the right and at the left) where $EHHS_{ij}$ becomes bellow the threshold or it is too far (by the presence of large gaps) from the central position (so the area out of $a$ and $b$ is considered unimportant), where $Pos$ may be the physical or the recombinant position (from a linkage map).
+where $x$ and $y$ are the positions (at the right and at the left) where $EHHS_{ij}$ becomes bellow the threshold or it is too far (by the presence of large gaps) from the central position (so the area out of $x$ and $y$ is considered unimportant), where $Pos$ may be the physical or the recombinant position (from a linkage map).
  
- \subsection{Quantifying homogeneity at each position and individual}
- 
+\subsubsection{Quantifying homogeneity at each position and individual}
 In case of doing a GWAS analysis, usually each position is evaluated independently in relation to the phenotype. That means that it is crucial to distinguish the genetic information between individuals at this position. Here we propose to include the information concerning to the homogeneity of the individual at neighbouring regions from the focus position (that is, a way to consider the linkage disequilibrium between the two chromosome copies of an individual at this region) in addition to the genotype at the focus position. That is, it is calculated a new statistic related to the neighbouring homogeneity for every position and individual. This statistic is obtained by dividing the $iES_i$ statistic given the contribution of each individual to the total:
 
  \begin{equation}
  iES_{k,i} = \frac{1}{2\sum_{l=1}^{n}I_{l,i}} \sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I_{k,ij-1} + I_{k,ij}),
  \end{equation}
 where $\sum_{k=1}^{k=n}iES_{k,i}=iES_i$ (considering the same threshold values -$a$ and $b$- for the each of the samples, lke $iES_i$ statistic). Here the only differential term between individuals (in relative terms) is the last sum. % Note also that the term $2\sum_{l=1}^{n}I_{l,i}$ can be eliminated from the equation because %
-That is, the objective here is the difference between individuals and not the absolute value. Therefore:
+%That is, the objective here is the difference between individuals and not the absolute value. Therefore:
 
 %Additionally, if we want to count not only the homogeneity in homozygous positions but also in heterozygous positions, we can define $I'_{k,ij}$, where it counts 1 if the genotype between $i$ and $j$ are completely homozygous or completely heterozygous.  %
 %Then the new statistic $iES'_{k,i}$ will consider also heterozygous regions (for example, in case having advantage for heterozygotes). That is:
 
-\begin{equation}
- iES'_{k,i} = %
-%% \frac{1}{2\sum_{r=1}^{n}I_{r}} \sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I'_{k,ij-1} + I'_{k,ij}) \propto 
-%{\sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I'_{k,ij-1} + I'_{k,ij})}.
-(\frac{1}{2\sum_{l=1}^{n}I_{l,i}} \sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I_{k,ij-1} + I_{k,ij}))/iES_i,
-\end{equation}
-and $\sum_{k=1}^{k=n}iES'_{k,i}=1$.
-%The limit of the positions ($a$ and $b$) can be set to those positions where the sum of all $I'_{k,ij}$ in relation to the number of individuals drops below 0.1, as the threshold established for the statistic $iES_i$. 
+%\begin{equation}
+% iES'_{k,i} = %
+%%% \frac{1}{2\sum_{r=1}^{n}I_{r}} \sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I'_{k,ij-1} + I'_{k,ij}) \propto 
+%%{\sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I'_{k,ij-1} + I'_{k,ij})}.
+%(\frac{1}{2\sum_{l=1}^{n}I_{l,i}} \sum_{j=a+1}^{b} (Pos_{j} - Pos_{j-1}) (I_{k,ij-1} + I_{k,ij}))/iES_i,
+%\end{equation}
+%and $\sum_{k=1}^{k=n}iES'_{k,i}=1$.
+%%The limit of the positions ($a$ and $b$) can be set to those positions where the sum of all $I'_{k,ij}$ in relation to the number of individuals drops below 0.1, as the threshold established for the statistic $iES_i$. 
 
-\subsection{Considering two populations: The quotient between the extension of homozigosity in target individuals from a population versus a reference population}
-Following the same reasoning, it is possible to estimate the effect of the extension of homozigosity per position and per individual in relation to the effect in a reference population. This is useful in case we are considering the effect of selection in the target population while we assume no selection in the reference population. Those position that have high $iES_i$ at both populations would be considered nuisance given by other factors, like genomic effect caused by the genetic architecture of the genome. Therefore, following \citet{Tang:2007by}, we define the statistic derived from $Rsb_i$:
+\subsubsection{The quotient between the extension of homozygosity in target individuals from a population versus a reference population}
+Following the same reasoning, it is possible to estimate the effect of the extension of homozygosity per position and per individual in relation to the effect in a reference population. This is useful in case we are considering the effect of selection in the target population while we assume no selection in the reference population. Those position that have high $iES_i$ at both populations would be considered nuisance given by other factors, like genomic effect caused by the genetic architecture of the genome. Therefore, following \citet{Tang:2007by}, we define the statistic derived from $Rsb_i$:
 
 \begin{equation}
 Rsb_{k,i} = \frac{iES_{k,i}}{iES_{i}^{popRef}}
