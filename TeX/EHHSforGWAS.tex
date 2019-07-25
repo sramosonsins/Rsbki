@@ -30,7 +30,7 @@
 \begin{document}
 
 \title{Detection of the effect of selected phenotypic traits using additional statistics in GWAS.}
-%\author{Sebastian E. Ramos-Onsins, Josep Ma. Folch, Miguel P\'erez-Enciso\\ (Contributed: not yet the real order)}
+%\author{Sebastian E. Ramos-Onsins, Ioanna Theoni Vourlakis, \\ Josep Ma. Folch, Miguel P\'erez-Enciso\\ (Contributed: not yet the real order)}
 \date{\today}
 \maketitle
 
@@ -38,7 +38,7 @@ We propose to use the quantity of linkage disequilibrium associated to a given p
 
 The GWAS analysis with a single panmictic population is based on the association analysis of a single variant position for each of the individuals (usually genotype information, that is, a variable with  the discrete values 0, 1 and 2, indicating the number of copies of a variant - reference or alternative -), considering the relationship between individuals and other variables, versus the observed phenotype at each of the individuals. Thus, it is crucial to define all the genetic features at the studied position for each individual. One of this genetic features is the degree of homozygosity/heterozygosity in neighbouring regions to this position at each of the individuals. The presence of causal variants close to a given position and the observation of homogeneity of the individual at this region will, presumably, be associated with the phenotype. The larger homogeneity on the focus position with their neighbouring region may indicate a causal effect.
 
-The resolution of this k,ind of statistics is expected to be in the range of the domestication process (not too short, approximately from several hundreds of generations to  thousands of generations, REFERENCE). This range may allow to detect critical traits and the effect of these traits on the genome under crucial events such as the domestication.
+The resolution of this kind of statistics is expected to be in the range of the domestication process (not too short, approximately from several hundreds of generations to  thousands of generations, REFERENCE). This range may allow to detect critical traits and the effect of these traits on the genome under crucial events such as the domestication.
 
 \section{Methods}
 \subsection{Considering a single population and polarized alleles (ancestral and derived)}
@@ -49,26 +49,27 @@ Following \cite{Sabeti:2002fv}, we define the statistic $EHH_d$ as the proportio
  \end{equation}
 where $n$ is the number of individual samples, and $I_{d_{k,ij}}$ counts 1 if the individual $k$ is homozygote for derived variant at position $i$ and is homozygote from position $i$ to $j$, otherwise counts 0. In the same way, $I_{d_{l,i}}$ counts 1 if the individual $l$ is homozygote for derived at position $i$, otherwise counts 0. The statistic $EHH_a$ is is calculated in the same way than $EHH_d$ but considering ancestral variant instead of derived variant.  
 
-In order to quantify the effect of the neighbouring homozygosity at a given studied position ($i$),  all values for $EHHS_{ij}$ are summed from  the position $i$,to their right and and their left sides, all the contributions of $EHHS_{ij}$, considering their distance (physical or recombinant), and until a threshold arbitrary value of $EHHS_{ij}$ (let's say 0.1). That is: 
+In order to quantify the effect of the neighbouring homozygosity at a given studied position ($i$),  all values for $EHH_{ij}$ are summed from  the position $i$,to their right and and their left sides, all the contributions of $EHH_{ij}$, considering their distance (physical or recombinant), and until a threshold arbitrary value of $EHH_{ij}$ (let's say 0.1). That is: 
 
 \begin{equation}
- iES_{d_i} = \sum_{j=x+1}^{y}\frac{(EHHS_{d_{ij-1}} + EHH_{d_{ij})}}{2} (Pos_{j} - Pos_{j-1}),
+ iES_{d_i} = \sum_{j=x+1}^{y}\frac{(EHH_{d_{ij-1}} + EHH_{d_{ij})}}{2} (Pos_{j} - Pos_{j-1}),
  \end{equation}
 where $x$ and $y$ are the positions (at the right and at the left) where $EHHS_{d_{ij}}$ becomes bellow the threshold or it is too far (by the presence of large gaps) from the central position (so the area out of $x$ and $y$ is considered unimportant), where $Pos$ may be the physical or the recombinant position (from a linkage map). The same is for the ancestral statistic ($iES_{a_i}$).
 
 The integrated relative Extended homozygosity statistic is then calculated as:
  \begin{equation}
- iES_{da_{i}} = \frac{iES_{d_{i}}} {iES_{a_{i}}}.
+ iRES_{da_{i}} = \frac{iES_{d_{i}}} {iES_{a_{i}}}.
  \end{equation}
 A value higher than 1 (if the genotype extension statistic for derived variants is larger than for ancestral variants) suggest the effect of positive selection favouring a derived variant at position $i$.  
 
 \subsubsection{Quantifying homogeneity at each position and individual}
-In case of doing a GWAS analysis, usually each position is evaluated independently in relation to the phenotype. That means that it is crucial to distinguish the genetic information between individuals at this position. Here we propose to include the information concerning to the homogeneity of the individual at neighbouring regions from the focus position (that is, a way to consider the linkage disequilibrium between the two chromosome copies of an individual at this region) in addition to the genotype at the focus position. That is, it is calculated a new statistic related to the neighbouring homogeneity for every position and individual. This statistic is obtained by slicing the $iES_{da_i}$ statistic given the contribution of each individual to the total:
+In case of doing a GWAS analysis, usually each position is evaluated independently in relation to the phenotype. That means that it is crucial to distinguish the genetic information between individuals at this position. Here we propose to include the information concerning to the homogeneity of the individual at neighbouring regions from the focus position (that is, a way to consider the linkage disequilibrium between the two chromosome copies of an individual at this region) in addition to the genotype at the focus position. That is, it is calculated a new statistic related to the neighbouring homogeneity for every position and individual. This statistic is obtained by slicing the $iRES_{da_i}$ statistic given the contribution of each individual to the total:
 
  \begin{equation}
- iES_{da_{k,i}} = \sum_{j=x+1}^{y} ({\frac{I_{d_{k,ij-1}}+ I_{d_{k,ij}}} {\sum_{l=1}^{n}I_{d_{l,i}}}}) / ({\frac{I_{a_{k,ij-1}}+ I_{a_{k,ij}}} {\sum_{l=1}^{n}I_{a_{l,i}}}})
+% iRES_{da_{k,i}} = \sum_{j=x+1}^{y} ({\frac{I_{d_{k,ij-1}}+ I_{d_{k,ij}}} {\sum_{l=1}^{n}I_{d_{l,i}}}}) / ({\frac{I_{a_{k,ij-1}}+ I_{a_{k,ij}}} {\sum_{l=1}^{n}I_{a_{l,i}}}})
+ iRES_{da_{k,i}} = \sum_{j=x+1}^{y} \frac{EHH_{d_{k,ij-1}}+ EHH_{d_{k,ij}}}  {{EHH_{a_{k,ij-1}}+ EHH_{a_{k,ij}}}}
  \end{equation}
-where $x$ and $y$ are the positions (at the right and at the left boundaries).
+where $x$ and $y$ are the positions (at the right and at the left boundaries). Note that the relationship between $iRES_{da_{i}}$ and $iRES_{da_{k,i}}$ is not simple because of the quotient.
 
 \subsection{Contrasting a population against a reference population}
 Here, we will use the framework developed by \cite{Tang:2007by} to study the degree of homogenization of a given position (using unphased genotype information).
