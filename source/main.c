@@ -19,6 +19,9 @@ int main(int arg, const char *argv[])
     double thresh;
     double **all_iES;
     double **pop_iESk;//new code
+    double **all_iESa;//new code
+    double **all_iESd;//new code
+    double **pop_iRESk;//new code
     long int L;
     int N;
     long int i,h;
@@ -28,10 +31,16 @@ int main(int arg, const char *argv[])
     int popcum;
     int popn_target; //new code
     
+    double *mean_res; //new code
+    double *median_res; //new code
+    double *med_res; //new code
+    double *sd_res; //new code
+    long int *nit_res;//new code
     double *mean;
     double *median;
     double *med;
     double *sd;
+    double **all_iRES;//new code
     double **all_Rsb;
     double ***pop_Rsbk;//new code
     long int *nit;
@@ -95,6 +104,22 @@ int main(int arg, const char *argv[])
     pop_iESk = (double **)calloc(popsize[popn_target],sizeof(double *));
     for(i=0;i<popsize[popn_target];i++) {pop_iESk[i] = (double *)calloc(L,sizeof(double));}
     //end
+    //new code
+    all_iESa = (double **)calloc(npops,sizeof(double *));
+    for(i=0;i<npops;i++) {all_iESa[i] = (double *)calloc(L,sizeof(double));}
+    all_iESd = (double **)calloc(npops,sizeof(double *));
+    for(i=0;i<npops;i++) {all_iESd[i] = (double *)calloc(L,sizeof(double));}
+    all_iRES = (double **)calloc(npops,sizeof(double *));
+    for(i=0;i<npops;i++) {all_iRES[i] = (double *)calloc(L,sizeof(double));}
+    pop_iRESk = (double **)calloc(popsize[popn_target],sizeof(double *));
+    for(i=0;i<popsize[popn_target];i++) {pop_iRESk[i] = (double *)calloc(L,sizeof(double));}
+
+    mean_res = (double *)calloc(npops,sizeof(double));
+    median_res = (double *)calloc(npops,sizeof(double));
+    sd_res = (double *)calloc(npops,sizeof(double));
+    nit_res = (long int *)calloc(npops,sizeof(long int));
+    //end
+
     mean = (double *)calloc(npops*(npops-1)/2,sizeof(double));
     median = (double *)calloc(npops*(npops-1)/2,sizeof(double));
     sd = (double *)calloc(npops*(npops-1)/2,sizeof(double));
@@ -106,7 +131,7 @@ int main(int arg, const char *argv[])
     pop_Rsbk = 0;
     if(popn_target>=0) {
         pop_Rsbk = (double ***)calloc(npops,sizeof(double **));
-        for(j=0;j<popsize[popn_target];j++) {
+        for(j=0;j<npops-1;j++) {
             pop_Rsbk[j] = (double **)calloc(popsize[popn_target],sizeof(double *));
             for(i=0;i<popsize[popn_target];i++) {
                 pop_Rsbk[j][i] = (double *)calloc(L,sizeof(double));
@@ -158,7 +183,128 @@ int main(int arg, const char *argv[])
     }
     fclose(genot_file);
     
-    //converting 2 homozygotes to 0:
+    //calculation of iRESda and iRESdak
+    popcum = 0;
+    for(j=0;j<npops;j++) {
+        if(j==popn_target) printf("\nComputing iRESdak and iRESda for pop %d of %d ...",j+1,npops);
+        else printf("\nComputing iRESda for pop %d of %d ...",j+1,npops);
+        fflush(stdout);
+         pop_geno_cols = popsize[j];
+        pop_geno = &geno[popcum];
+        calc_iRESda_iRESdak_slow(pop_geno, lox, &geno_rows, &pop_geno_cols, &thresh, all_iESa[j], all_iESd[j], pop_iRESk,(j==popn_target));
+        popcum += popsize[j];
+    }
+
+    //calculation iRES: later calculate median, mean and sd:
+    printf("\nComputing iRESda and iRESdak..."); fflush(stdout);
+    for(i=0;i<L;i++) {
+        for(j=0;j<npops;j++) {
+            if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0) {
+                all_iRES[j][i] = log(all_iESd[j][i])-log(all_iESa[j][i]);
+                mean_res[j] = mean_res[j] + all_iRES[j][i];
+                sd_res[j] = sd_res[j] + all_iRES[j][i] * all_iRES[j][i];
+                nit_res[j] += 1;
+            }
+            else {
+                all_iRES[j][i] = 1234567890;
+            }
+        }
+    }
+    // median ...
+    med_res = (double *)calloc(L,sizeof(double));
+    for(j=0;j<npops;j++) {
+        for(i=0;i<L;i++) {
+            if(all_iRES[j][i] != 1234567890) {
+                med_res[i] = all_iRES[j][i];
+            }
+        }
+        qsort(med_res,nit_res[j],sizeof(double),compare_);
+        if((double)nit_res[j]/2.0 == nit_res[j]/2.0) {
+            median_res[j] = (med_res[(long int)((double)nit_res[j]/2.0 - 1.0)] +
+                         med_res[(long int)((double)nit_res[j]/2.0)]) / 2.0;
+        }
+        else median_res[j] = med_res[nit_res[j]/2];
+    }
+    free(med_res);
+    // mean, sd ...
+    for(j=0;j<npops;j++) {
+            mean_res[j] = mean_res[j]/(double)nit_res[j];
+            sd_res[j] = sqrt(sd_res[j]/((double)nit_res[j]-1.0) - mean_res[j]*mean_res[j] * (double)nit_res[j]/((double)nit_res[j]-1.0)); //smapled sd
+    }
+
+    //writing output file
+    file_out[0] = '\0';
+    strcat(file_out,file_in);
+    strcat(file_out,"_Results_iESd_iESa_iRES_pop.txt\0");
+    printf("\nWriting iESa and iESd and iRES results in the output file %s...",file_out);
+    fflush(stdout);
+    
+    if (!(results_file = fopen(file_out,"w"))) {
+        printf("Error writing the input file %s\n",file_out);
+        exit(1);
+    }
+    //header
+    fprintf(results_file,"Position\t");
+    for(j=0;j<npops;j++) fprintf(results_file,"iESd_%s\tiESa_%s\t",pop_name[j],pop_name[j]);
+    for(j=0;j<npops;j++) fprintf(results_file,"log(iESd_%s)\tlog(iESa_%s)\t",pop_name[j],pop_name[j]);
+    for(j=0;j<npops;j++) fprintf(results_file,"log_iRESda(%s)\t",pop_name[j]);
+    for(j=0;j<npops;j++) fprintf(results_file,"log_iRESdaN(%s)\t",pop_name[j]);
+
+    fprintf(results_file,"\n");
+    //data
+    for(i=0;i<L;i++) {
+        fprintf(results_file,"%f\t",lox[i]);
+        for(j=0;j<npops;j++) {
+            if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0)
+                fprintf(results_file,"%f\t%f\t",all_iESd[j][i],all_iESa[j][i]);
+            else fprintf(results_file,"NA\tNA\t");
+        }
+        for(j=0;j<npops;j++) {
+            if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0)
+                fprintf(results_file,"%f\t%f\t",log(all_iESd[j][i]),log(all_iESa[j][i]));
+            else fprintf(results_file,"NA\tNA\t");
+        }
+        for(j=0;j<npops;j++) {
+            if(all_iRES[j][i] != 1234567890) fprintf(results_file,"%f\t",all_iRES[j][i]);
+            else fprintf(results_file,"NA\t");
+        }
+        for(j=0;j<npops;j++) {
+            if(all_iRES[j][i] != 1234567890) fprintf(results_file,"%f\t",(all_iRES[j][i]-median_res[j])/sd_res[j]);
+            else fprintf(results_file,"NA\t");
+        }
+        fprintf(results_file,"\n");
+    }
+    fclose(results_file);
+    
+    if(popn_target >= 0) {
+        //output iRESk
+        file_out[0] = '\0';
+        strcat(file_out,file_in);
+        strcat(file_out,"_Results_iRESdak_pop\0");
+        strcat(file_out,pop_name[popn_target]);
+        strcat(file_out,".txt\0");
+        printf("\nWriting iRESk results (not log, no normalized) in the output file %s...",file_out);
+        fflush(stdout);
+        if (!(results_file = fopen(file_out,"w"))) {
+            printf("Error writing the input file %s\n",file_out);
+            exit(1);
+        }
+        //header
+        fprintf(results_file,"Position\t");
+        for(k=0;k<popsize[popn_target];k++) fprintf(results_file,"iRESk_ind%d\t",k+1);
+        fprintf(results_file,"\n");
+        //data
+        for(i=0;i<L;i++) {
+            fprintf(results_file,"%f\t",lox[i]);
+            for(k=0;k<popsize[popn_target];k++) {
+                fprintf(results_file,"%f\t",pop_iRESk[k][i]);
+            }
+            fprintf(results_file,"\n");
+        }
+        fclose(results_file);
+    }
+
+    //converting value 2 (homozygotes alternative) to 0 (homozygotes unpolarized):
     printf("\nConverting all homozygotes to value 0..."); fflush(stdout);
     for(j=0;j<N;j++) {
         for(i=0;i<L;i++) {
@@ -304,7 +450,7 @@ int main(int arg, const char *argv[])
         //output iESk
         file_out[0] = '\0';
         strcat(file_out,file_in);
-        strcat(file_out,"_Results_log_iESk_pop\0");
+        strcat(file_out,"_Results_iESk_pop\0");
         strcat(file_out,pop_name[popn_target]);
         strcat(file_out,".txt\0");
         printf("\nWriting iESk results in the output file %s...",file_out);
@@ -371,20 +517,43 @@ int main(int arg, const char *argv[])
             }
         }
     }
-    
     //freed
-    for(j=0;j<popsize[popn_target];j++) {
-         for(i=0;i<popsize[popn_target];i++) {
-            free(pop_Rsbk[j][i]);
-         }
-        free(pop_Rsbk[j]);
+    if(popn_target>=0) {
+        for(j=0;j<npops-1;j++) {
+            for(i=0;i<popsize[popn_target];i++) {
+                free(pop_Rsbk[j][i]);
+            }
+            free(pop_Rsbk[j]);
+        }
+        free(pop_Rsbk);
     }
-    free(pop_Rsbk);
-    for(i=0;i<npops*(npops-1)/2;i++) {free(all_Rsb[i]);}
+    for(i=0;i<npops*(npops-1)/2;i++) {
+        free(all_Rsb[i]);
+    }
     free(all_Rsb);
-    for(i=0;i<npops;i++) {free(all_iES[i]);}
+    free(mean);
+    free(sd);
+    free(nit);
+    for(i=0;i<popsize[popn_target];i++) {
+        free(pop_iESk[i]);
+        free(pop_iRESk[i]);
+    }
+    free(pop_iESk);
+    free(pop_iRESk);
+    for(i=0;i<npops;i++) {
+        free(all_iESa[i]);
+        free(all_iESd[i]);
+        free(all_iES[i]);
+    }
+    free(mean_res);
+    free(sd_res);
+    free(nit_res);
+    free(all_iESa);
+    free(all_iESd);
     free(all_iES);
-    for(j=0;j<N;j++) {free(geno[j]);}
+    for(j=0;j<N;j++) {
+        free(geno[j]);
+    }
     free(geno);
     printf("\ndone\n");
     exit(0);

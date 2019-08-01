@@ -14,10 +14,10 @@ void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_
     void calc_EHHS_Ikij_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max, double *EHH, double **Ikij, int pop_target);
     
     double *x;
-    double *y;
+    //double *y;
     double *EHHSa;
     //new code
-    double *z;
+    //double *z;
     double **Ikij;
     //end
     
@@ -29,12 +29,12 @@ void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_
     
     L = *geno_rows;
     x = (double *)calloc(L-1,sizeof(double));
-    y = (double *)calloc(L-1,sizeof(double));
+    //y = (double *)calloc(L-1,sizeof(double));
     //new code
     Ikij = 0;
-    z = 0;
+    //z = 0;
     if(pop_target) {
-        z = (double *)calloc(L-1,sizeof(double));
+        //z = (double *)calloc(L-1,sizeof(double));
         Ikij = (double **)calloc(*geno_cols,sizeof(double *));
         for(k=0;k<*geno_cols;k++) {
             Ikij[k] = (double *)calloc(L,sizeof(double));
@@ -46,37 +46,37 @@ void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_
     for(i=0;i<L-1;i++) {x[i] = lox[i+1] - lox[i];}
     for(i=0;i<L;i++) {
         calc_EHHS_Ikij_pos(&i,geno,geno_rows,geno_cols,thresh,&min,&max,EHHSa,Ikij,pop_target); //new function
+        //for(j=min;j<max;j++) {
+        //    y[j] = EHHSa[j+1] + EHHSa[j];
+        //}
         for(j=min;j<max;j++) {
-            y[j] = EHHSa[j+1] + EHHSa[j];
+            iES[i] += (EHHSa[j+1] + EHHSa[j]) * /* y[j]*/ x[j] / 2.0;
         }
-        for(j=min;j<max;j++) {
-            iES[i] += y[j] * x[j] / 2.0;
-        }
-        for(j=min;j<max;j++) {y[j] = 0.0;}
+        //for(j=min;j<max;j++) {y[j] = 0.0;}
         //new code
         if(pop_target) {
             for(k=0;k<*geno_cols;k++) {
-                for(j=min;j<max;j++) {
-                    z[j] = Ikij[k][j+1] + Ikij[k][j];
-                }
+                //for(j=min;j<max;j++) {
+                //    z[j] = Ikij[k][j+1] + Ikij[k][j];
+                //}
                 //sumiESk = 0.;
                 for(j=min;j<max;j++) {
-                    iESk[k][i] += z[j] * x[j] / 2.0;
+                    iESk[k][i] += (Ikij[k][j+1] + Ikij[k][j]) * /* z[j]*/ x[j] / 2.0;
                 //    sumiESk += iESk[k][i];
                 }
                 //if(!(sumiESk >= (iES[i] - 0.1) && sumiESk <= (iES[i] + 0.1)))
                 //    printf("iES and sumiESk are different\n");
-                for(j=min;j<max;j++) {z[j] = 0.0;}
+                //for(j=min;j<max;j++) {z[j] = 0.0;}
             }
         }
         //end
     }
     free(x);
-    free(y);
+    //free(y);
     free(EHHSa);
     //new code
     if(pop_target) {
-        free(z);
+        //free(z);
         for(k=0;k<*geno_cols;k++) {free(Ikij[k]);}
         free(Ikij);
     }
