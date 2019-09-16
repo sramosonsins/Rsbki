@@ -49,12 +49,12 @@ Following \cite{Sabeti:2002fv}, we define the statistic $EHH_d$ as the proportio
  \end{equation}
 where $n$ is the number of individual samples, and $I_{d_{k,ij}}$ counts 1 if the individual $k$ is homozygote for derived variant at position $i$ and is homozygote from position $i$ to $j$, otherwise counts 0. In the same way, $I_{d_{l,i}}$ counts 1 if the individual $l$ is homozygote for derived at position $i$, otherwise counts 0. The statistic $EHH_a$ is calculated in the same way than $EHH_d$ but considering ancestral variant instead of derived variant.  
 
-In order to quantify the effect of the neighbouring homozygosity at a given studied position ($i$),  all values for $EHH_{ij}$ are summed from  the position $i$,to their right and and their left sides, all the contributions of $EHH_{ij}$, considering their distance (physical or recombinant), and until a threshold arbitrary value of $EHH_{ij}$ (let's say 0.1). That is: 
+In order to quantify the effect of the neighbouring homozygosity at a given studied position ($i$),  all values for $EHH_{ij}$ are summed from the position $i$ to their right and and to their left sides considering their distance (physical or recombinant), and until reaching a threshold arbitrary value of $EHH_{ij}$ (let's say 0.1). That is: 
 
 \begin{equation}
  iES_{d_i} = \sum_{j=x+1}^{y}\frac{(EHH_{d_{ij-1}} + EHH_{d_{ij})}}{2} (Pos_{j} - Pos_{j-1}),
  \end{equation}
-where $x$ and $y$ are the positions (at the right and at the left) where $EHHS_{d_{ij}}$ becomes bellow the threshold or it is too far (by the presence of large gaps) from the central position (so the area out of $x$ and $y$ is considered unimportant), where $Pos$ may be the physical or the recombinant position (from a linkage map). The same is for the ancestral statistic ($iES_{a_i}$).
+where $x$ and $y$ are the positions (at the right and at the left) where $EHHS_{d_{ij}}$ becomes below the threshold or it is too far (by the presence of large gaps) from the central position (so the area out of $x$ and $y$ is considered unimportant), and $Pos$ is the physical or the recombinant position (from a linkage map). The same is for the ancestral statistic ($iES_{a_i}$).
 
 The integrated relative Extended homozygosity statistic is then calculated as:
  \begin{equation}
@@ -63,7 +63,7 @@ The integrated relative Extended homozygosity statistic is then calculated as:
 A value higher than 1 (if the genotype extension statistic for derived variants is larger than for ancestral variants) suggest the effect of positive selection favouring a derived variant at position $i$.  
 
 \subsubsection{Quantifying homogeneity at each position and individual}
-In case of doing a GWAS analysis, usually each position is evaluated independently in relation to the phenotype. That means that it is crucial to distinguish the genetic information between individuals at this position. Here we propose to include the information concerning to the homogeneity of the individual at neighbouring regions from the focus position (that is, a way to consider the linkage disequilibrium between the two chromosome copies of an individual at this region) in addition to the genotype at the focus position. That is, it is calculated a new statistic related to the neighbouring homogeneity for every position and individual. This statistic is obtained by slicing the $iRES_{da_i}$ statistic given the contribution of each individual to the total:
+In case of doing a GWAS analysis, usually each position and genotype is evaluated independently in relation to each individual phenotype. That means that it is crucial to distinguish the genetic information between individuals at this position. Here we propose to include the information concerning to the homogeneity of the individual at neighbouring regions from the focus position (that is, a way to consider the linkage disequilibrium between the two chromosome copies of an individual at this region) in addition to the genotype at the focus position. That is, it is calculated a statistic related to the neighbouring homogeneity for every position and individual. This statistic is obtained by slicing the $iRES_{da_i}$ statistic given the contribution of each individual to the total:
 
  \begin{equation}
  iRES_{da_{k,i}} =  \frac{iES_{d,k}}{iES_{a,k}} = \frac{\sum_{j=x+1}^{y}(EHH_{d_{k,ij-1}}+ EHH_{d_{k,ij}})(Pos_{j} - Pos_{j-1})}  {\sum_{j=x+1}^{y}(EHH_{a_{k,ij-1}}+ EHH_{a_{k,ij}})(Pos_{j} - Pos_{j-1})},
@@ -126,7 +126,7 @@ To perform a study of association genotype-phenotype, we can include the informa
 % \end{equation}
 %where $X$ is a matrix that relates the observed with the parameters for fixed effects defined in the $b$ vector and $Z$ is a matrix that relates the observed data with the parameters related to the genotype data. $e$ is the residual error. DEFINE ASSUMPTIONS, DISTRIBUTIONS  AND SCENARIOS.
 
-\noindent The proposal is to chose the SNPs with higher $iES$ per position (or $Rsb$ in case having a reference population) and use  these candidate positions for studying the association with the phenotype using the $iES_k$  (or $Rsb_k$) matrix.
+\noindent The proposal is to chose the SNPs with higher $iRES_{da_{k,i}}$, $iES$ or $Rsb_{k,i}$ (in case having a reference population) and use  these candidate positions for studying the association with the phenotype.
 
 \section{Results}
 \subsection{Simulation of data under different scenarios and Validation}

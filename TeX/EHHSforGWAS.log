@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  31 JUL 2019 16:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  16 SEP 2019 11:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -352,7 +352,7 @@ eft bound-aries) and $\OML/cmm/m/it/10.95 EHH[] \OT1/cmr/m/n/10.95 =
 Here is how much of TeX's memory you used:
  5369 strings out of 493089
  69188 string characters out of 6134842
- 138891 words of memory out of 5000000
+ 137891 words of memory out of 5000000
  8709 multiletter control sequences out of 15000+600000
  41343 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -371,7 +371,7 @@ public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/
 times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr
 8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on EHHSforGWAS.pdf (8 pages, 134060 bytes).
+Output written on EHHSforGWAS.pdf (8 pages, 133944 bytes).
 PDF statistics:
  84 PDF objects out of 1000 (max. 8388607)
  60 compressed objects within 1 object stream
