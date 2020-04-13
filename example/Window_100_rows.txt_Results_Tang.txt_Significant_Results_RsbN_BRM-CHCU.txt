@@ -1,1 +1,2 @@
 bp	data_stats...col_RsbN...k.
+86688	-3.932176

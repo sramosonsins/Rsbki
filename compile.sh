@@ -3,5 +3,5 @@
 set -x
 
 cd ./source
-gcc *.c -lm -o ../bin/Rsbki -O -Wall
+gcc *.c -lm -o ../bin/Rsbki -O3 -Wall
 cd ..
