@@ -63,7 +63,7 @@ int main(int arg, const char *argv[])
     }
     
     printf(TANG_SOFTW);
-    printf("\n\nTang_stats_plus ");
+    printf("\n\nRsbki ");
     while(argc < arg) {
         printf("%s ",argv[argc]);
         argc++;
@@ -79,9 +79,12 @@ int main(int arg, const char *argv[])
     npops = atoi(argv[6]);
     popn_target = atoi(argv[7]) - 1; //new code: note added 1 to next indexes in argv
     popsize = (int *)calloc(npops,sizeof(int));
+    //for(i=0;i<npops;i++) {
+    //    if(i!=npops-1) popsize[i] = atoi(argv[7+1+i+1]) - atoi(argv[7+1+i]);
+    //    else popsize[i] = (N+2+1) - atoi(argv[7+1+i]);
+    //}
     for(i=0;i<npops;i++) {
-        if(i!=npops-1) popsize[i] = atoi(argv[7+1+i+1]) - atoi(argv[7+1+i]);
-        else popsize[i] = (N+2+1) - atoi(argv[7+1+i]);
+        popsize[i] = atoi(argv[7+1+i+1]);
     }
     pop_name = (char **)calloc(npops,sizeof(char *));
     for(i=0;i<npops;i++) {
@@ -574,20 +577,22 @@ int read_row(FILE *plink_file, char *chr_name, double *lox, int **geno, int geno
             field[nfield++] = ch;
         }
         else {
-            switch(ncol) {
-                case 0:
-                    for(i=0;i<nfield;i++)
-                        chr_name[i] = field[i];
-                    break;
-                case 1:
-                    lox[row] = atof(field);
-                    break;
-                default:
-                    geno[ncol - 2][row] = atoi(field);
-                    break;
+            if(nfield) {
+                switch(ncol) {
+                    case 0:
+                        for(i=0;i<nfield;i++)
+                            chr_name[i] = field[i];
+                        break;
+                    case 1:
+                        lox[row] = atof(field);
+                        break;
+                    default:
+                        geno[ncol - 2][row] = atoi(field);
+                        break;
+                }
+                ncol++;
+                for(i=0;i<nfield;i++) {field[i]='\0';}
             }
-            ncol++;
-            for(i=0;i<nfield;i++) {field[i]='\0';}
             nfield = 0;
             if(ncol-2 > geno_cols) {
                 printf("\nError: input file having more columns than defined. row: %ld ncols: %d\n",row,ncol);
@@ -595,8 +600,12 @@ int read_row(FILE *plink_file, char *chr_name, double *lox, int **geno, int geno
             }
         }
     }
-    if(ncol-2+1 != geno_cols) {
-        printf("\nError: input file having different columns than defined. row: %ld ncols: %d\n",row,ncol);
+    if(nfield) {
+        geno[ncol - 2][row] = atoi(field);
+        ncol++;
+    }
+    if(ncol-2 != geno_cols) {
+        printf("\nError: input file having different individuals than defined. row: %ld n_indiv: %d \n",row,ncol);
         exit(1);
     }
     if(ch == EOF)
@@ -616,8 +625,8 @@ void usage()
 {
     printf(TANG_SOFTW);
     printf("\n\nUsage:");
-    printf("\nTang_stats_plus [Plink-like filename] [number of rows] [number of individuals] [threshold value] [seed] [number pops] [number of target pop -starting from 1 (0 if unused)] [col pop1] [col pop2] ... [col pop N]");
-    printf("\n\nOtput file is automatically generated using the input filename plus '_Results_Tang.txt'");
+    printf("\nRsbki [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -starting from 1 (0 if unused)] [size pop1] [size pop2] ... [size popN]");
+    printf("\n\nOutput file is automatically generated using the input filename plus '_Results_Tang.txt'");
     printf("\n\n");
 }
 

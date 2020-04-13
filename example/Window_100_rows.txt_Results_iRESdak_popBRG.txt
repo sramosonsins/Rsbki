@@ -1,101 +1,101 @@
-Position	iRESk_ind1	iRESk_ind2	iRESk_ind3	iRESk_ind4	iRESk_ind5	
-13233.000000	nan	nan	nan	nan	nan	
-13621.000000	nan	nan	nan	nan	nan	
-18007.000000	nan	nan	nan	nan	nan	
-18008.000000	nan	nan	nan	nan	nan	
-18026.000000	0.000000	0.000000	inf	0.000000	0.000000	
-18370.000000	nan	nan	nan	nan	nan	
-18485.000000	nan	nan	nan	nan	nan	
-26202.000000	nan	nan	nan	nan	nan	
-26204.000000	nan	nan	nan	nan	nan	
-26213.000000	nan	nan	nan	nan	nan	
-26248.000000	nan	nan	nan	nan	nan	
-26714.000000	nan	nan	nan	nan	nan	
-26730.000000	nan	nan	nan	nan	nan	
-26753.000000	nan	nan	nan	nan	nan	
-27025.000000	nan	nan	nan	nan	nan	
-27105.000000	nan	nan	nan	nan	nan	
-28389.000000	nan	nan	nan	nan	nan	
-28423.000000	nan	nan	nan	nan	nan	
-28449.000000	nan	nan	nan	nan	nan	
-28467.000000	nan	nan	nan	nan	nan	
-28479.000000	nan	nan	nan	nan	nan	
-28492.000000	nan	nan	nan	nan	nan	
-30829.000000	inf	0.000000	nan	nan	0.000000	
-31047.000000	nan	nan	nan	nan	nan	
-31060.000000	nan	nan	nan	nan	nan	
-31100.000000	nan	nan	nan	nan	nan	
-31516.000000	nan	nan	nan	nan	nan	
-31566.000000	nan	nan	nan	nan	nan	
-31567.000000	nan	nan	nan	nan	nan	
-31569.000000	nan	nan	nan	nan	nan	
-31585.000000	nan	nan	nan	nan	nan	
-35348.000000	nan	nan	nan	nan	nan	
-35349.000000	nan	nan	nan	nan	nan	
-37087.000000	nan	nan	nan	nan	nan	
-37092.000000	nan	nan	nan	nan	nan	
-37096.000000	nan	nan	nan	nan	nan	
-37137.000000	nan	nan	nan	nan	nan	
-37167.000000	nan	nan	nan	nan	nan	
-49918.000000	nan	nan	nan	nan	nan	
-49921.000000	nan	nan	nan	nan	nan	
-50077.000000	nan	nan	nan	nan	nan	
-50089.000000	nan	nan	nan	nan	nan	
-51708.000000	nan	nan	nan	nan	nan	
-51765.000000	nan	nan	nan	nan	nan	
-51769.000000	nan	nan	nan	nan	nan	
-51773.000000	nan	nan	nan	nan	nan	
-51776.000000	nan	nan	nan	nan	nan	
-54017.000000	nan	nan	nan	nan	nan	
-54341.000000	nan	nan	nan	nan	nan	
-54380.000000	nan	nan	nan	nan	nan	
-54487.000000	nan	nan	nan	nan	nan	
-54571.000000	nan	nan	nan	nan	nan	
-54937.000000	nan	nan	nan	nan	nan	
-54952.000000	nan	nan	nan	nan	nan	
-55097.000000	nan	nan	nan	nan	nan	
-55128.000000	nan	nan	nan	nan	nan	
-56327.000000	nan	nan	nan	nan	nan	
-57019.000000	nan	nan	nan	nan	nan	
-57836.000000	nan	nan	nan	nan	nan	
-57847.000000	nan	nan	nan	nan	nan	
-58601.000000	nan	nan	nan	nan	nan	
-58650.000000	nan	nan	nan	nan	nan	
-58703.000000	nan	nan	nan	nan	nan	
-58704.000000	nan	nan	nan	nan	nan	
-58713.000000	nan	nan	nan	nan	nan	
-58718.000000	nan	nan	nan	nan	nan	
-59102.000000	nan	nan	nan	nan	nan	
-59105.000000	nan	nan	nan	nan	nan	
-59324.000000	nan	nan	nan	nan	nan	
-59350.000000	nan	nan	nan	nan	nan	
-66868.000000	nan	nan	nan	nan	nan	
-66892.000000	nan	nan	nan	nan	nan	
-66930.000000	nan	nan	nan	nan	nan	
-66938.000000	nan	nan	nan	nan	nan	
-67135.000000	nan	nan	nan	nan	nan	
-67156.000000	nan	nan	nan	nan	nan	
-67167.000000	nan	nan	nan	nan	nan	
-70077.000000	nan	nan	nan	nan	nan	
-70093.000000	nan	nan	nan	nan	nan	
-70219.000000	nan	nan	nan	nan	nan	
-70257.000000	nan	nan	nan	nan	nan	
-71324.000000	nan	nan	nan	nan	nan	
-71345.000000	nan	nan	nan	nan	nan	
-71431.000000	nan	nan	nan	nan	nan	
-73636.000000	nan	nan	nan	nan	nan	
-75311.000000	nan	nan	nan	nan	nan	
-75324.000000	nan	nan	nan	nan	nan	
-76450.000000	nan	nan	nan	nan	nan	
-76471.000000	nan	nan	nan	nan	nan	
-76474.000000	nan	nan	nan	nan	nan	
-85623.000000	nan	nan	nan	nan	nan	
-86000.000000	nan	nan	nan	nan	nan	
-86475.000000	nan	inf	nan	0.000000	0.000000	
-86483.000000	nan	nan	nan	nan	nan	
-86489.000000	nan	nan	nan	nan	nan	
-86688.000000	nan	inf	nan	0.000000	0.000000	
-86779.000000	nan	nan	nan	nan	nan	
-87329.000000	nan	nan	nan	nan	nan	
-87756.000000	nan	nan	nan	nan	nan	
-87801.000000	nan	nan	nan	nan	nan	
+Position	iRESk_ind1	iRESk_ind2	iRESk_ind3	iRESk_ind4	iRESk_ind5	iRESk_ind6	iRESk_ind7	iRESk_ind8	iRESk_ind9	iRESk_ind10	
+13233.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+13621.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+18007.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+18008.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+18026.000000	0.000000	0.000000	inf	0.000000	0.000000	nan	0.000000	nan	nan	nan	
+18370.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+18485.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+26202.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	nan	inf	nan	
+26204.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+26213.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+26248.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+26714.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+26730.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+26753.000000	0.000000	0.000000	0.000000	0.000000	0.000000	inf	nan	0.000000	0.000000	nan	
+27025.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	nan	0.000000	0.000000	nan	
+27105.000000	nan	0.000000	nan	0.000000	0.000000	inf	inf	nan	nan	nan	
+28389.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+28423.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+28449.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+28467.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+28479.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	nan	0.000000	0.000000	nan	
+28492.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+30829.000000	inf	0.000000	nan	nan	0.000000	0.000000	nan	nan	nan	nan	
+31047.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31060.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31100.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31516.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31566.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31567.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31569.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+31585.000000	nan	0.000000	nan	0.000000	0.000000	inf	inf	inf	nan	inf	
+35348.000000	0.000000	0.000000	0.000000	0.000000	0.000000	inf	0.000000	0.000000	0.000000	nan	
+35349.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+37087.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+37092.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+37096.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+37137.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+37167.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+49918.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+49921.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+50077.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	nan	0.000000	0.000000	nan	
+50089.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+51708.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+51765.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+51769.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+51773.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+51776.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+54017.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	0.000000	0.000000	0.000000	nan	
+54341.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+54380.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+54487.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+54571.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+54937.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+54952.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+55097.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+55128.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+56327.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+57019.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+57836.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	0.000000	0.000000	0.000000	nan	
+57847.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+58601.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	0.000000	0.000000	0.000000	nan	
+58650.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	nan	nan	0.000000	nan	
+58703.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	0.000000	0.000000	0.000000	nan	
+58704.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+58713.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+58718.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	0.000000	0.000000	0.000000	nan	
+59102.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+59105.000000	0.000000	0.000000	nan	0.000000	0.000000	inf	nan	nan	0.000000	nan	
+59324.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+59350.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+66868.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+66892.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+66930.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+66938.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+67135.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+67156.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+67167.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+70077.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+70093.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+70219.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+70257.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+71324.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+71345.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+71431.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+73636.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+75311.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+75324.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+76450.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+76471.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+76474.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+85623.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+86000.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+86475.000000	nan	inf	nan	0.000000	0.000000	inf	inf	inf	inf	inf	
+86483.000000	nan	0.000000	nan	0.000000	0.000000	inf	nan	0.000000	0.000000	nan	
+86489.000000	nan	0.000000	nan	0.000000	0.000000	inf	nan	nan	0.000000	nan	
+86688.000000	nan	inf	nan	0.000000	0.000000	inf	inf	inf	inf	inf	
+86779.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+87329.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+87756.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
+87801.000000	nan	nan	nan	nan	nan	nan	nan	nan	nan	nan	
