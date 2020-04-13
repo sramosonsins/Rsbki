@@ -27,22 +27,40 @@
 \newcommand{\comb}[2]{{#1 \choose #2}}
 \newcommand{\mosr}[1]{{ #1}}
 
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+}
+
 \begin{document}
 
-\title{Detection of the effect of selected phenotypic traits using additional statistics in GWAS.}
-%\author{Sebastian E. Ramos-Onsins, Ioanna Theoni Vourlakis, \\ Josep Ma. Folch, Miguel P\'erez-Enciso\\ (Contributed: not yet the real order)}
+\title{Association of adaptive phenotypic traits to causal variants using the extended genotype homozygosity matrix.}
+%\author{Sebastian E. Ramos-Onsins, Ioanna Theoni Vourlakis, \\ Josep Ma. Folch, Armando Caballero, Miguel P\'erez-Enciso\\ (Contributed: not yet the real order)}
 \date{\today}
 \maketitle
 
-We propose to use the quantity of linkage disequilibrium associated to a given position as a ponderation for each of the individuals at each given studied position. This statistic will be used in GWAS analysis of association to detect the effect of adaptive selection of the studied phenotype. If we consider a single population that have suffered a strong selective event, those causal positions that strongly determined the selective effect will increase rapidly their frequency, and thus will have larger linkage disequilibrium with the closest sequences than other regions not affected by selective events.  With this idea it is pretended to take advantage of the stronger footprint of a sweep associated to a selective event  to give more weight to those individuals in whose the studied position contains a determinant allele, as well as longer linkage in close regions caused by the effect of the selective sweep. Our hypothesis is that this approach can have  promising results to detect the causal mutations in panmictic populations that have experimented stronger selective events. On the other hand, we think that can not give additional information in GWAS studies designed to distinguish between divergent populations (or control-disease populations). A consistent simulation study is required in this project to evaluate different scenarios.
+\section{Abstract}
+
+
+
+\section{Introduction}
+
+The detection of the effect of adaptive phenotypic traits is fundamental for understanding the number of affected variants and the strength of selection for these adaptive traits. The detection of the association between an adaptive phenotype and the genotype can be difficult, depending on the effect of each associated variant and the effect of the adaptation over the positions around it. A number of studies, which the aim of understanding the patterns of frequencies for adaptive traits  \citep[\textit{e.g.},][]{Eyre-Walker:2010aa,Caballero:2015aa,Lourenco:2011aa,Connallon:2015aa}, shown that the genome architecture for a trait depends on the (mathematical) relationship of the trait versus fitness (that is, if the fitness is directly correlated with the trait or, alternatively, fitness and traits are correlated distributions). Simons et al. (2018) avoided this problem by inferring the relationship between trait and fitness from empirical data and estimated the genetic architecture of the trait, assuming pleiotropy and stabilizing selection. Also, \citet{Beissinger:2018aa} developed a test to detect the effect of selection on a quantitative complex trait using the whole information on effect sizes. Finally, \citet{Uricchio:2019aa} recently developed a new method to detect the signals of polygenic selection using the derived allele effect size from GWAS analysis and the derived allele frequency of the associated variants. All of these methods can be applied to observe the effects of environmental changes on the genome for specific traits related to adaptation. 
+
+Here, we are aimed to detect strong and medium adaptive effects with higher precision than the current methods based on the association of the trait versus phenotype. We propose to use the signals of linkage disequilibrium produced by causal adaptive variants to increase the precision in locating associate variants as well as distinguishing  between adaptive versus non-adaptive variants. The reasoning is the following: the causal variants of an adaptive trait will left signals of adaptation (\textit{e.g.,}, increase of homozygosity around the causal variants, more linkage disequilibrium, reduction of variation) around them. If a trait is under adaptive pattern, we expect that the associated variants exhibit signals of adaptation, while other non-adaptive traits will not have such signals on associated variants. Additionally, adaptive signals will help to increase the precision to locate the causal variants, together with the genotype. 
+
+We propose to study the association between the phenotype and the genotype considering  additionally (as additional genotype information)  a matrix containing the extended genotype homozygosity.  This matrix would be used in the analysis of association to detect the effect of adaptive selection of the studied phenotype. %If we consider a single population that have suffered a strong selective event, those causal positions that strongly determined the selective effect will increase rapidly their frequency, and thus will have larger linkage disequilibrium with the closest sequences than other regions not affected by selective events.  With this idea it is pretended to take advantage of the stronger footprint of a sweep associated to a selective event  to give more weight to those individuals in whose the studied position contains a determinant allele, as well as longer linkage in close regions caused by the effect of the selective sweep. 
+Our hypothesis is that this approach can have  promising results to detect the causal mutations in panmictic populations that have experimented stronger selective events. On the other hand, this approach will not not give additional information in association studies designed to distinguish between divergent admixed populations (and neither control-disease populations). A consistent simulation study is required in this project to evaluate different scenarios.
 
 The GWAS analysis with a single panmictic population is based on the association analysis of a single variant position for each of the individuals (usually genotype information, that is, a variable with  the discrete values 0, 1 and 2, indicating the number of copies of a variant - reference or alternative -), considering the relationship between individuals and other variables, versus the observed phenotype at each of the individuals. Thus, it is crucial to define all the genetic features at the studied position for each individual. One of this genetic features is the degree of homozygosity/heterozygosity in neighbouring regions to this position at each of the individuals. The presence of causal variants close to a given position and the observation of homogeneity of the individual at this region will, presumably, be associated with the phenotype. The larger homogeneity on the focus position with their neighbouring region may indicate a causal effect.
 
-The resolution of this kind of statistics is expected to be in the range of the domestication process (not too short, approximately from several hundreds of generations to  thousands of generations, REFERENCE). This range may allow to detect critical traits and the effect of these traits on the genome under crucial events such as the domestication.
+The resolution of this kind of statistics is expected to be in the range of the domestication process (not too short, approximately from several hundreds of generations to  thousands of generations, \citep{Sabeti:2002aa}. This range may allow to detect critical traits and the effect of these traits on the genome under crucial events such as the domestication.
 
 \section{Methods}
 \subsection{Considering a single population and polarized alleles (ancestral and derived)}
-Following \cite{Sabeti:2002fv}, we define the statistic $EHH_d$ as the proportion of homozygote individuals of the derived allele from position $i$ (the target position) to position $j$, in relation to the number of homozygote derived individuals at the position $i$.  That is:
+Following \citet{Sabeti:2002aa}, we define the statistic $EHH_d$ as the proportion of homozygote individuals of the derived allele from position $i$ (the target position) to position $j$, in relation to the number of homozygote derived individuals at the position $i$.  That is:
 
  \begin{equation}
  EHH_{d_{ij}} = \frac{\sum_{k=1}^{n}I_{d_{k,ij}}}{\sum_{l_d=1}^{n}I_{d_{l,i}}},
@@ -71,14 +89,14 @@ In case of doing a GWAS analysis, usually each position and genotype is evaluate
 where $x$ and $y$ are the positions (at the right and at the left boundaries) and $EHH_{d_{k,ij}} = I_{d_{k,ij}} / (\sum_{l_d=1}^{n}I_{d_{l,i}})$. Note that $\sum_{k=1}^{n}iES_{d,k}=iES_d$ but the relationship between $iRES_{da_{i}}$ and $iRES_{da_{k,i}}$ is not the sum of all $iRES_{da_i}$ because of the quotient.
 
 \subsection{Contrasting a population against a reference population}
-Here, we will use the framework developed by \cite{Tang:2007by} to study the degree of homogenization of a given position (using unphased genotype information).
+Here, we will use the framework developed by {Tang:2007aa} to study the degree of homogenization of a given position (using unphased genotype information).
 \subsubsection{Define candidate positions}
- In a first step, it is useful to define those candidate positions in relation to their maximum local extension of their homozygosity. This step is optional, as other criteria for defining candidate positions can be used. Following \cite{Tang:2007by}, we define $EHHS_{ij}$ as the proportion of homozygote individuals from position $i$ (the position of interest) to position $j$, in relation to the number of homozygote individuals at the position $i$. That is:
+ In a first step, it is useful to define those candidate positions in relation to their maximum local extension of their homozygosity. This step is optional, as other criteria for defining candidate positions can be used. Following \citep{Tang:2007aa}, we define $EHHS_{ij}$ as the proportion of homozygote individuals from position $i$ (the position of interest) to position $j$, in relation to the number of homozygote individuals at the position $i$. That is:
  
  \begin{equation}
  EHHS_{ij} = \frac{\sum_{k=1}^{n}I_{k,ij}}{\sum_{l=1}^{n}I_{l,i}},
  \end{equation}
-where $n$ is the number of individual samples, and $I_{k,ij}$ counts 1 if the individual $k$ is homozygote from position $i$ to $j$ (\textit{i.e.}, using the genotype nomenclature, all variants have the values 0 or 2 at this region), otherwise counts 0. In the same way, $I_{l,i}$ counts 1 if the individual $l$ is homozygote at position $i$, otherwise counts 0. This statistic is calculated from position i to any position (left or right) until this proportion becomes enough small to be considered negligible. This threshold value, although is somewhat arbitrary, it has been considered 0.1 in the original work \citep{Tang:2007by} and here it is used the same criteria. The $EHHS_{ij}$ values for the position $i$ are kept and used to calculate the next statistic $iES_i$ \citep{Tang:2007by}.
+where $n$ is the number of individual samples, and $I_{k,ij}$ counts 1 if the individual $k$ is homozygote from position $i$ to $j$ (\textit{i.e.}, using the genotype nomenclature, all variants have the values 0 or 2 at this region), otherwise counts 0. In the same way, $I_{l,i}$ counts 1 if the individual $l$ is homozygote at position $i$, otherwise counts 0. This statistic is calculated from position i to any position (left or right) until this proportion becomes enough small to be considered negligible. This threshold value, although is somewhat arbitrary, it has been considered 0.1 in the original work {Tang:2007aa} and here it is used the same criteria. The $EHHS_{ij}$ values for the position $i$ are kept and used to calculate the next statistic $iES_i$ {Tang:2007aa}.
 
 The following calculation of the $iES_i$ statistic pretends to quantify the effect of the neighbouring homozygosity at a given studied position. Having all values for $EHHS_{ij}$, we count the total area of homozigosity around the position $i$, that is, having the position $i$ as the center, we sum, at their right and and their left, all the contributions of $EHHS_{ij}$, considering their distance (physical or recombinant). that is: 
 
@@ -109,7 +127,7 @@ where $\sum_{k=1}^{k=n}iES_{k,i}=iES_i$ (considering the same threshold values -
 %%The limit of the positions ($a$ and $b$) can be set to those positions where the sum of all $I'_{k,ij}$ in relation to the number of individuals drops below 0.1, as the threshold established for the statistic $iES_i$. 
 
 \subsubsection{The quotient between the extension of homozygosity in target individuals from a population versus a reference population}
-Following the same reasoning, it is possible to estimate the effect of the extension of homozygosity per position and per individual in relation to the effect in a reference population. This is useful in case we are considering the effect of selection in the target population while we assume no selection in the reference population. Those position that have high $iES_i$ at both populations would be considered nuisance given by other factors, like genomic effect caused by the genetic architecture of the genome. Therefore, following \citet{Tang:2007by}, we define the statistic derived from $Rsb_i$:
+Following the same reasoning, it is possible to estimate the effect of the extension of homozygosity per position and per individual in relation to the effect in a reference population. This is useful in case we are considering the effect of selection in the target population while we assume no selection in the reference population. Those position that have high $iES_i$ at both populations would be considered nuisance given by other factors, like genomic effect caused by the genetic architecture of the genome. Therefore, following \citep{Tang:2007aa}, we define the statistic derived from $Rsb_i$:
 
 \begin{equation}
 Rsb_{k,i} = \frac{iES_{k,i}}{iES_{i}^{popRef}}
@@ -117,32 +135,129 @@ Rsb_{k,i} = \frac{iES_{k,i}}{iES_{i}^{popRef}}
 where $\sum_{k=0}^{k=n}Rsb_{k,i} = Rsb_i.$
 
 \subsection{The study of association phenotype-genotype and the information related to the homogeneity of individuals in neighbouring regions}
-To perform a study of association genotype-phenotype, we can include the information provided by the statistic $iES_{k,i}$ and $Rsb_{k,i}$ in two different ways: (a) by adding the matrix $iES$ (or $Rsbi$) in replacement of the genotype matrix or (b) using this matrix as a ponderation of the genotype matrix. %The two approaches have different meanings and thus different interpretations. In the first case, it is assumed that the homogeneity along the contiguous regions of a position  in a given individual has the same importance than the genotype of this individual, which suggest that regions close to the causal position (not necessarily causal) would be associated. In the second case, the method would stress only those genotypes with an associated phenotype that additionally would have strong ponderation (large homogeneity in the surrounding region). 
+%To perform a study of association genotype-phenotype, we can include the information provided by the statistic $iES_{k,i}$ and $Rsb_{k,i}$ in two different ways: (a) by adding the matrix $iES$ (or $Rsbi$) in replacement of the genotype matrix or (b) using this matrix as a ponderation of the genotype matrix. The two approaches have different meanings and thus different interpretations. In the first case, it is assumed that the homogeneity along the contiguous regions of a position  in a given individual has the same importance than the genotype of this individual, which suggest that regions close to the causal position (not necessarily causal) would be associated. In the second case, the method would stress only those genotypes with an associated phenotype that additionally would have strong ponderation (large homogeneity in the surrounding region). 
 
-%A mixed model is used for relating the phenotype of each individual (a vector $y$ of phenotypes) with the genetic features of the individual at each position (that is, a vector $g$ containing the genotypes and the homogeneity versus surrounding positions). For each SNP we relate the phenotype using this general expression:
+A mixed model is used to associate the phenotype of each individual (a vector $y$ of phenotypes) with the genetic features of the individual at each position (that is, a vector $g$ containing the relation with each individual genotype and a vector $h$ containing the relation with each individual extension of homozygosity versus surrounding positions). For the whole SNPs we relate the phenotype using this general expression:
 
-% \begin{equation}
-%y = Xb + Zg + e ,
-% \end{equation}
-%where $X$ is a matrix that relates the observed with the parameters for fixed effects defined in the $b$ vector and $Z$ is a matrix that relates the observed data with the parameters related to the genotype data. $e$ is the residual error. DEFINE ASSUMPTIONS, DISTRIBUTIONS  AND SCENARIOS.
+\begin{equation}
+y = Wa + Xg + Zh + e ,
+\end{equation}
+where $W$ is a matrix that considers the fixed effects for each individual (related in the $b$ vector), $X$ is a matrix that contains the genotypes of all SNPs and individuals and .$Z$ is a matrix having the extension of homozygosity for each SNP and individual (\textit{i.e.,}, the statistics $iES_{k,i}$ and $Rsb_{k,i}$). Finally, $e$ is the residual error vector. 
 
-\noindent The proposal is to chose the SNPs with higher $iRES_{da_{k,i}}$, $iES$ or $Rsb_{k,i}$ (in case having a reference population) and use  these candidate positions for studying the association with the phenotype.
+\noindent GWAS analysis is performed with the software ...MIGUEL ....\par
+
+\noindent Comparison of the results obtained using GWAS analysis plus the Extended Genotype Homozygosity matrix are contrasted with the test developed by \citet{Beissinger:2018aa}. which identifies selection on complex traits. \par
+
+%DEFINE ASSUMPTIONS, DISTRIBUTIONS  AND SCENARIOS.
+\subsection{Simulations}
+
+Forward simulations of a population have been performed with Slim v,3 \citep{Haller:2019aa}. A population of 1000 individuals ($N_e$) is simulated. Consider 10 chromosomes of 10Mb (a total of 100Mb), each fragment including 10000 coding regions of 1.5Kb evenly distributed every 8.5 Kb. We consider mutation rate constant of 1.25e-7 per position and generation, and recombination rate variable following a curve with a minimum peak on the centre of chromosome (rate of 2.5e-8) and increasing logarithmically to achieve a maximum at telomeres (2.5e-5).
+
+Functional positions (non-synonymous, defined as the two first positions of each codon) are under selective effects, while non-functional positions are considered neutral. Here, we model positive selection, as we are interested in detecting adaptive events. The new mutations falling in functional positions are under the effect of positive and negative selection: a proportion of mutants will be under positive selection (this ones following an exponential distribution), while the rest will be under negative selection (gamma distribution), according to \citep{Boyko:2008aa} results for human species. 
+
+We have looked at the differences in the distribution of selective and phenotype effects considering the EW and a gamma bivariant distribution \citep{Caballero:2015aa} for negative values (using \textit{simstudy} library in R). The EW distribution estimates the phenotype value from an exponential-like pattern and considering a nuisance parameter, while bivariant gamma distribution   is more flexible in considering different patterns of phenotype effects. If we consider a exponential distribution for phenotype effects (shape=1), the distributions are quite similar (see Figure~\ref{comEWvsBiv}). The major difference is observed between distributions with correlation 0, where the EW function is more spread. We decided to use the first option (EW model) because it is possible to estimate easily the selective effects for an environmental change.
+
+Different scenarios of the relationship between the fitness effect and the phenotypic trait are considered, from no-correlated to highly correlated relationship, using the Eyre-Walker (EW) model \citep{Eyre-Walker:2010aa}, that is, the effect for a phenotype trait $z$ is related to selective effects, $4Ns$, using the equation $z=\delta (4N_e s)^\tau (1+\epsilon)$, where $\delta$ is a given random value (\textit{e.g.},-1 and 1, or -1), $\tau$ is related to the correlation of phenotypic trait with the $s$ and $\epsilon$ is a normal distribution with mean 0 and standard deviation $\sigma_{\epsilon}$ (a kind environmental effect). For positive selection, and in order to give phenotypic values close to zero for high selective effects, the value of $\tau$ is transformed to negative. A normalization factor is included to achieve same limit values of $z$ for all conditions. We considered that the effects of selection within genes are multiplicative, being $1$, $1+s$ and $1+2s\text{ }(+s^2)$ at ancestral homozygote, heterozygote and derived homozygote, respectively. Dominance values are calculated following \citep{Wang:1998aa}, in which the dominance becomes negatively correlated with selective effect (here for the absolute value of selective effect).  The number of standing variants that contribute to the second scenario as positively selected become smaller when the displacement is larger, because the distribution of mutations are mostly concentrated on small selective and phenotypic effects, by definition of the model.
+
+We have also included an additional step in simulations, where an environmental change occurs and modifies the selective effect of each phenotype, according to the correlation of phenotype with the fitness. In that case, the optimum phenotype is displaced from 0 (optimal at initial environment) to a given value, and the new selective effect is re-calculated by inverting the previous equation, Thus, in the new environment, standing variants change their selective effects to $s=\frac{|z-d|^{1/\tau}}{4*N_e}$, where $d$ is the proportion of displacement of the optimal phenotype from previous optimal (zero). Phenotypic and selective effects for new variants at the new environment are following a new distribution with same shape (and mean for negative selective effects) but different mean for positive selective effects. As in standing variants, the optimal phenotypic effects are displaced ($d$). %The displacement of the optimal phenotype has been chosen according to avoid very extreme situations: the displacement was smaller as the fitness correlation with the phenotype was larger. 
+
+The output files collected  for each variant the frequencies, the selective effects for the two environments, the dominance, and the phenotypic effect, plus the complete sequence per individual. The total population, (1000 individuals) is collected. 
+Permutation of phenotypes between individuals is performed to control the type I error rate for each scenario. As in \citep{Caballero:2015aa}, two different number of SNPs where chosen for each scenario: (i) the whole SNPs data and (ii)a subset of SNPs of 1\% of the total.
+
+Ten different scenarios were analysed, each one having an environmental change included (Table~\ref{tablescen}). The population runs for $10 N_e$ generations, then, the environmental change occurs and the population runs for $N_e$ additional generations. The distribution of mutations for all the scenarios are shown in Figures~\ref{DistALLScenarios1}, \ref{DistALLScenarios2} and \ref{DistALLScenarios3}, considering the origin of the mutation, or shown at Figures~\ref{DistALLScenariosv21}, \ref{DistALLScenariosv22} and \ref{DistALLScenariosv23}, considering the effect on the first and second environment. Data is collected before the environmental change occurs and also at the end of simulation. With these conditions, we pretend to study the effect of positive selection (weak and pervasive versus strong and relatively rare) in a context of neutral deleterious mutations and, posteriorly, under a strong environmental change that modifies the fitness of the individuals. The effect of these environmental change is modulated, as well as the correlation of the studied trait in relation to the fitness. The proposed new test is evaluated as well as other available tests  \citep{Beissinger:2018aa,Uricchio:2019aa}.
+ 
+\begin{table}[h]
+\begin{center}\begin{tabular}{ccccc}
+Scenario & $\tau$ & $\sigma_{\epsilon}$ & $\%(+)_2$ & $s_2$ (+)\\
+\hline
+1  & 0.00 & 0.60& 1.0   & 1.25e-2 \\
+2  & 0.00 & 0.60 & 10.0 & 1.25e-3\\
+3  & 0.10 & 0.50 & 1.0   & 1.25e-2\\
+4  & 0.10 & 0.50 & 10.0 & 1.25e-3\\
+5  & 0.25 & 0.40 & 1.0   & 1.25e-2\\
+6  & 0.25 & 0.40 & 10.0 & 1.25e-3\\
+7  & 0.50 & 0.30 & 1.0   & 1.25e-2\\
+8  & 0.50 & 0.30 & 10.0 & 1.25e-3\\
+9  & 0.80 & 0.10 & 1.0   & 1.25e-2\\
+10 & 0.80 & 0.10 & 10.0 & 1.25e-3\\
+\hline
+\end{tabular} 
+\caption{Conditions for the different simulated scenarios considered. Common parameters are those for the gamma distribution for deleterious variants, with a mean of $s=-0.03$ and shape of 0.2, the percentage of beneficial variants to $\%(+)_1=1.0$, the mean strength of beneficial variants in the first scenario to $s_1=1.25e-2$ and the proportion of displacement ($d=0.2$), except for conditions with $\tau=0$ (no correlation phenotype-genotype), where no displacement was included. The first columns ($\tau$, $\sigma_{\epsilon}$) refers to the phenotypic trait, and the next two columns ($\%(+)_2$ and $s_2$) refers to the maximum proportion of beneficial variants and the mean strength of beneficial selective effects of variants at the second scenario (environment).}
+\label{tablescen}
+\end{center}
+\end{table}
+
+\noindent Once simulations are finished, two kind of  output files are obtained: a \textit{ms} file with the variants and positions and a table including the position, the selection coefficients for environment 1 and 2, the dominance, the type of mutation (neutral/functional) and the phenotype effect for each variant.  \textit{ms} format sequences were converted to genotype formatted file, where each individual can have 0,1 or 2 derived alleles per position. This file included the genotypes from the first and second environment and it is used as input file for a software (Rbski) to calculate the matrix of statistics used for GWAS analysis.
+
+\subsection{Empirical data}
+To choose: rice, pigs, humans, bovine, drosophila?... depending on available data.
+%\noindent The proposal is to chose the SNPs with higher $iRES_{da_{k,i}}$, $iES$ or $Rsb_{k,i}$ (in case having a reference population) and use  these candidate positions for studying the association with the phenotype.
 
 \section{Results}
 \subsection{Simulation of data under different scenarios and Validation}
-\noindent -A  population suffering an strong selective sweep on a trait of interest.\par
-\noindent -A  population NOT suffering an strong selective sweep on a trait of interest.\par
-\noindent -Different scenarios with violations of the assumptions of a panmictic population or with violation of the effect of selection. %For example, two divergent populations under different selective forces are crossed (F1) and this one back-crossed to obtain a F2 and F3 that is genotyped and phenotyped.\par
+\noindent -Descriptive information about all the simulations. SNPs, Variation, SFS, patterns of selective sweeps. distribution of phenotypic trait per individual..\par
+\noindent -GWAS analysis: Study of the effect of the different parameters on the detection of QTLs. Real versus detected QTLs. Effect of EGH matrix. Precision in the detection of the causal SNP.\par
+\noindent -Comparison with the test of \citet{Beissinger:2018aa}. Detection of strong effects versus mild effects. \par
 
 \subsection{Real Data Analysis}
-\noindent -Real data from humans?\par
-\noindent -Real data from bovine?\par
+TO DO
 
 \section{Discussion}
+TO DO
 
-
-\newpage
 \bibliographystyle{genetics}
 \bibliography{EHHGWAS}
+
+\newpage
+\beginsupplement
+
+\begin{figure}[h]
+{\includegraphics[scale=0.75]{./GammBiv_EW_plot_Fig1.pdf}}
+\caption{Comparison of distributions between Eyre-Walker (EW) function and a Gamma Bivariant correlated distribution. The selective effect follows a gamma distribution with shape=0.2 and mean=$-0.03$ for negative side and shape=1 and mean=0.01 for positive side and a proportion of positive variants of 5e-3. the first row show the distribution of Selective (x-axis) and Phenotype (y-axis) effects for three different conditions given the EW function (left: $\tau=0.0$, $sd=0.5$, center: $\tau=0.25$, $sd=0.4$, right: $\tau=0.50$, $sd=0.4$), The second row show the distribution of Selective and Phenotype effects for three different correlation conditions (left: $\rho=0.0$, center: $\rho=0.80$ and  left $\rho=0.95$). }
+\label{comEWvsBiv}
+\hspace*{-0.5cm}
+\end{figure}
+
+\begin{figure}[h]
+{\includegraphics[scale=0.45]{./Dist_ALLScenarios1.pdf}}
+\caption{Distribution of the beneficial and deleterious mutations for scenarios 1,2,3, and 4. Each row indicates one scenario. At left side, Black circles indicate the mutations for the initial environment, while purple dots indicate the displacement of selective effects for standing mutations at the new second environment. Horizontal lines indicate the optimal phenotypic value for the first (black) and second scenario (blue). Vertical line separate deleterious from beneficial selective effects. At right side, the distribution of new mutations at the second environment (in blue) in relation to its selective and phenotype effect.}
+\label{DistALLScenarios1}
+\hspace*{-0.5cm}
+\end{figure}
+
+\begin{figure}[h]
+{\includegraphics[scale=0.45]{./Dist_ALLScenarios2.pdf}}
+\caption{Distribution of the beneficial and deleterious mutations for scenarios 5,6,7, and 8. Each row indicates one scenario. At left side, Black circles indicate the mutations for the initial environment, while purple dots indicate the displacement of selective effects for standing mutations at the new second environment. Horizontal lines indicate the optimal phenotypic value for the first (black) and second scenario (blue). Vertical line separate deleterious from beneficial selective effects. At right side, the distribution of new mutations at the second environment (in blue) in relation to its selective and phenotype effect.}
+\label{DistALLScenarios2}
+\hspace*{-0.5cm}
+\end{figure}
+
+\begin{figure}[h]
+{\includegraphics[scale=0.45]{./Dist_ALLScenarios3.pdf}}
+\caption{Distribution of the beneficial and deleterious mutations for scenarios 9 and 10. Each row indicates one scenario. At left side, Black circles indicate the mutations for the initial environment, while purple dots indicate the displacement of selective effects for standing mutations at the new second environment. Horizontal lines indicate the optimal phenotypic value for the first (black) and second scenario (blue). Vertical line separate deleterious from beneficial selective effects. At right side, the distribution of new mutations at the second environment (in blue) in relation to its selective and phenotype effect.}
+\label{DistALLScenarios3}
+\hspace*{-0.5cm}
+\end{figure}
+
+\begin{figure}[h]
+{\includegraphics[scale=0.45]{./Dist_ALLScenariosv2_1.pdf}}
+\caption{Distribution of the beneficial and deleterious mutations for scenarios 1,2,3, and 4. Each row indicates one scenario. At left side, Black circles indicate the mutations for the initial environment. Horizontal line indicate the optimal phenotypic value for the first scenario. Vertical line separate deleterious from beneficial selective effects. At right side, the distribution of new (blue) and standing (purple) mutations (coming from first environment) at the second environment in relation to its selective and phenotype effect. The blue horizontal line indicates the optimal phenotype for the second environment.}
+\label{DistALLScenariosv21}
+\hspace*{-0.5cm}
+\end{figure}
+
+\begin{figure}[h]
+{\includegraphics[scale=0.45]{./Dist_ALLScenariosv2_2.pdf}}
+\caption{Distribution of the beneficial and deleterious mutations for scenarios 5,6,7, and 8. Each row indicates one scenario. At left side, Black circles indicate the mutations for the initial environment. Horizontal line indicate the optimal phenotypic value for the first scenario. Vertical line separate deleterious from beneficial selective effects. At right side, the distribution of new (blue) and standing (purple) mutations (coming from first environment) at the second environment in relation to its selective and phenotype effect. The blue horizontal line indicates the optimal phenotype for the second environment.}
+\label{DistALLScenariosv22}
+\hspace*{-0.5cm}
+\end{figure}
+
+\begin{figure}[h]
+{\includegraphics[scale=0.45]{./Dist_ALLScenariosv2_3.pdf}}
+\caption{Distribution of the beneficial and deleterious mutations for scenarios 9, and 10. Each row indicates one scenario. At left side, Black circles indicate the mutations for the initial environment. Horizontal line indicate the optimal phenotypic value for the first scenario. Vertical line separate deleterious from beneficial selective effects. At right side, the distribution of new (blue) and standing (purple) mutations (coming from first environment) at the second environment in relation to its selective and phenotype effect. The blue horizontal line indicates the optimal phenotype for the second environment.}
+\label{DistALLScenariosv23}
+\hspace*{-0.5cm}
+\end{figure}
 
 \end{document}

@@ -1,18 +1,75 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{11}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
+\bibitem[{{\sc Beissinger} {\em et~al.\/}(2018){\sc Beissinger}, {\sc Kruppa},
+  {\sc Cavero}, {\sc Ha}, {\sc Erbe} {\em et~al.\/}}]{Beissinger:2018aa}
+{\sc Beissinger, T.}, {\sc J.~Kruppa}, {\sc D.~Cavero}, {\sc N.-T. Ha}, {\sc
+  M.~Erbe}, {\em et~al.\/}, 2018 A simple test identifies selection on complex
+  traits.
+\newblock Genetics {\bf 209}: 321--333.
+
+\bibitem[{{\sc Boyko} {\em et~al.\/}(2008){\sc Boyko}, {\sc Williamson}, {\sc
+  Indap}, {\sc Degenhardt}, {\sc Hernandez} {\em et~al.\/}}]{Boyko:2008aa}
+{\sc Boyko, A.~R.}, {\sc S.~H. Williamson}, {\sc A.~R. Indap}, {\sc J.~D.
+  Degenhardt}, {\sc R.~D. Hernandez}, {\em et~al.\/}, 2008 Assessing the
+  evolutionary impact of amino acid mutations in the human genome.
+\newblock PLoS Genet {\bf 4}: e1000083.
+
+\bibitem[{{\sc Caballero} {\em et~al.\/}(2015){\sc Caballero}, {\sc Tenesa} and
+  {\sc Keightley}}]{Caballero:2015aa}
+{\sc Caballero, A.}, {\sc A.~Tenesa}, and {\sc P.~D. Keightley}, 2015 The
+  nature of genetic variation for complex traits revealed by gwas and regional
+  heritability mapping analyses.
+\newblock Genetics {\bf 201}: 1601--13.
+
+\bibitem[{{\sc Connallon} and {\sc Clark}(2015)}]{Connallon:2015aa}
+{\sc Connallon, T.}, and {\sc A.~G. Clark}, 2015 The distribution of fitness
+  effects in an uncertain world.
+\newblock Evolution {\bf 69}: 1610--1618.
+
+\bibitem[{{\sc Eyre-Walker}(2010)}]{Eyre-Walker:2010aa}
+{\sc Eyre-Walker, A.}, 2010 Evolution in health and medicine sackler
+  colloquium: Genetic architecture of a complex trait and its implications for
+  fitness and genome-wide association studies.
+\newblock Proc Natl Acad Sci U S A {\bf 107 Suppl 1}: 1752--6.
+
+\bibitem[{{\sc Haller} and {\sc Messer}(2019)}]{Haller:2019aa}
+{\sc Haller, B.~C.}, and {\sc P.~W. Messer}, 2019 Slim 3: Forward genetic
+  simulations beyond the wright-fisher model.
+\newblock Mol Biol Evol {\bf 36}: 632--637.
+
+\bibitem[{{\sc Louren{\c c}o} {\em et~al.\/}(2011){\sc Louren{\c c}o}, {\sc
+  Galtier} and {\sc Gl{\'e}min}}]{Lourenco:2011aa}
+{\sc Louren{\c c}o, J.}, {\sc N.~Galtier}, and {\sc S.~Gl{\'e}min}, 2011
+  Complexity, pleiotropy, and the fitness effect of mutations.
+\newblock Evolution {\bf 65}: 1559--71.
+
 \bibitem[{{\sc Sabeti} {\em et~al.\/}(2002){\sc Sabeti}, {\sc Reich}, {\sc
-  Higgins}, {\sc Levine}, {\sc Richter} {\em et~al.\/}}]{Sabeti:2002fv}
+  Higgins}, {\sc Levine}, {\sc Richter} {\em et~al.\/}}]{Sabeti:2002aa}
 {\sc Sabeti, P.~C.}, {\sc D.~E. Reich}, {\sc J.~M. Higgins}, {\sc H.~Z.~P.
   Levine}, {\sc D.~J. Richter}, {\em et~al.\/}, 2002 Detecting recent positive
   selection in the human genome from haplotype structure.
 \newblock Nature {\bf 419}: 832--7.
 
 \bibitem[{{\sc Tang} {\em et~al.\/}(2007){\sc Tang}, {\sc Thornton} and {\sc
-  Stoneking}}]{Tang:2007by}
+  Stoneking}}]{Tang:2007aa}
 {\sc Tang, K.}, {\sc K.~R. Thornton}, and {\sc M.~Stoneking}, 2007 A new
   approach for using genome scans to detect recent positive selection in the
   human genome.
 \newblock PLoS Biol {\bf 5}: e171.
+
+\bibitem[{{\sc Uricchio} {\em et~al.\/}(2019){\sc Uricchio}, {\sc Kitano}, {\sc
+  Gusev} and {\sc Zaitlen}}]{Uricchio:2019aa}
+{\sc Uricchio, L.~H.}, {\sc H.~C. Kitano}, {\sc A.~Gusev}, and {\sc N.~A.
+  Zaitlen}, 2019 An evolutionary compass for detecting signals of polygenic
+  selection and mutational bias.
+\newblock Evol Lett {\bf 3}: 69--79.
+
+\bibitem[{{\sc Wang} {\em et~al.\/}(1998){\sc Wang}, {\sc Caballero}, {\sc
+  Keightley} and {\sc Hill}}]{Wang:1998aa}
+{\sc Wang, J.}, {\sc A.~Caballero}, {\sc P.~D. Keightley}, and {\sc W.~G.
+  Hill}, 1998 Bottleneck effect on genetic variance. a theoretical
+  investigation of the role of dominance.
+\newblock Genetics {\bf 150}: 435--47.
 
 \end{thebibliography}
