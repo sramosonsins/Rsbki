@@ -78,13 +78,14 @@ int main(int arg, const char *argv[])
     init_seed1(atol(argv[5]));
     npops = atoi(argv[6]);
     popn_target = atoi(argv[7]) - 1; //new code: note added 1 to next indexes in argv
+    if(popn_target<0) popn_target=0;
     popsize = (int *)calloc(npops,sizeof(int));
     //for(i=0;i<npops;i++) {
     //    if(i!=npops-1) popsize[i] = atoi(argv[7+1+i+1]) - atoi(argv[7+1+i]);
     //    else popsize[i] = (N+2+1) - atoi(argv[7+1+i]);
     //}
     for(i=0;i<npops;i++) {
-        popsize[i] = atoi(argv[7+1+i+1]);
+        popsize[i] = atoi(argv[7+1+i]);
     }
     pop_name = (char **)calloc(npops,sizeof(char *));
     for(i=0;i<npops;i++) {
@@ -192,7 +193,7 @@ int main(int arg, const char *argv[])
         if(j==popn_target) printf("\nComputing iRESdak and iRESda for pop %d of %d ...",j+1,npops);
         else printf("\nComputing iRESda for pop %d of %d ...",j+1,npops);
         fflush(stdout);
-         pop_geno_cols = popsize[j];
+        pop_geno_cols = popsize[j];
         pop_geno = &geno[popcum];
         calc_iRESda_iRESdak_slow(pop_geno, lox, &geno_rows, &pop_geno_cols, &thresh, all_iESa[j], all_iESd[j], pop_iRESk,(j==popn_target));
         popcum += popsize[j];
@@ -625,7 +626,7 @@ void usage()
 {
     printf(TANG_SOFTW);
     printf("\n\nUsage:");
-    printf("\nRsbki [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -starting from 1 (0 if unused)] [size pop1] [size pop2] ... [size popN]");
+    printf("\nRsbki [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -starting from 1- (eg=1)] [size pop1] [size pop2] ... [size popN]");
     printf("\n\nOutput file is automatically generated using the input filename plus '_Results_Tang.txt'");
     printf("\n\n");
 }

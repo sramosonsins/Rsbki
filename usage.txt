@@ -2,7 +2,7 @@ Software for calculating iES plus Rsb and iESk plus Rsbk (per individual) statis
 by Sebastian E. Ramos-Onsins
 
 Usage:
-Rsbki [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number of target pop -starting from 1 (0 if unused)] [size pop1] [size pop2] ... [size popN]
+Rsbki [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number of target pop -starting from 1- (eg=1)] [size pop1] [size pop2] ... [size popN]
 
 Otput file is automatically generated with the input filename plus '_Results_Tang.txt' + other files associated to the target population
 

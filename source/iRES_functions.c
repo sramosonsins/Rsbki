@@ -44,7 +44,7 @@ void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int 
     iESkd = 0.0;
     for(i=0;i<L-1;i++) {x[i] = lox[i+1] - lox[i];}
     for(i=0;i<L;i++) {
-        calc_EHHak_EHHdk_pos(&i,geno,geno_rows,geno_cols,thresh,&min,&max,EHHa,EHHd,iEHHak,iEHHdk,pop_target);
+        calc_EHHak_EHHdk_pos(&i,geno,geno_rows, geno_cols,thresh,&min,&max, EHHa,EHHd,iEHHak,iEHHdk,pop_target );
         for(j=min;j<max;j++) {
             iESa[i] += (EHHa[j+1] + EHHa[j]) * x[j] / 2.0;
             iESd[i] += (EHHd[j+1] + EHHd[j]) * x[j] / 2.0;

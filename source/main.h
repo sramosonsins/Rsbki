@@ -10,7 +10,7 @@
 
 #define TANG_SOFTW  "\nSoftware for calculating iES plus Rsb and iESk plus Rsbk (per individual) statistics." \
 "\nfollowing Tang, Thornton & Stoneking, PloS Biology 2007." \
-"\nversion 20100413"
+"\nversion 20200414"
 
 #include <stdio.h>
 #include <stdlib.h>
