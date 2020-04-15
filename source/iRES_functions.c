@@ -59,7 +59,9 @@ void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int 
                 }
                 /**/sumiESka += iESka;
                 /**/sumiESkd += iESkd;
-                iRESk[k][i] = iESkd / iESka;
+                if(iESka)
+                iRESk[k][i] = iESkd / (iESka + iESkd); // iESkd / iESka;
+                else iRESk[k][i] = -1;
                 iESka = 0.0;
                 iESkd = 0.0;
             }

@@ -261,20 +261,20 @@ int main(int arg, const char *argv[])
         for(j=0;j<npops;j++) {
             if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0)
                 fprintf(results_file,"%f\t%f\t",all_iESd[j][i],all_iESa[j][i]);
-            else fprintf(results_file,"NA\tNA\t");
+            else fprintf(results_file,"-1\t-1\t"); /*else fprintf(results_file,"NA\tNA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0)
                 fprintf(results_file,"%f\t%f\t",log(all_iESd[j][i]),log(all_iESa[j][i]));
-            else fprintf(results_file,"NA\tNA\t");
+            else fprintf(results_file,"-1\t-1\t"); /*else fprintf(results_file,"NA\tNA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iRES[j][i] != 1234567890) fprintf(results_file,"%f\t",all_iRES[j][i]);
-            else fprintf(results_file,"NA\t");
+            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iRES[j][i] != 1234567890) fprintf(results_file,"%f\t",(all_iRES[j][i]-median_res[j])/sd_res[j]);
-            else fprintf(results_file,"NA\t");
+            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
         }
         fprintf(results_file,"\n");
     }
@@ -287,7 +287,7 @@ int main(int arg, const char *argv[])
         strcat(file_out,"_Results_iRESdak_pop\0");
         strcat(file_out,pop_name[popn_target]);
         strcat(file_out,".txt\0");
-        printf("\nWriting iRESk results (not log, no normalized) in the output file %s...",file_out);
+        printf("\nWriting iRESk_prop results ( iESkd/(iESka+iESkd) instead of iESkd/iESka ) in the output file %s...",file_out);
         fflush(stdout);
         if (!(results_file = fopen(file_out,"w"))) {
             printf("Error writing the input file %s\n",file_out);
@@ -295,13 +295,16 @@ int main(int arg, const char *argv[])
         }
         //header
         fprintf(results_file,"Position\t");
-        for(k=0;k<popsize[popn_target];k++) fprintf(results_file,"iRESk_ind%d\t",k+1);
+        for(k=0;k<popsize[popn_target];k++) fprintf(results_file,"iRESk_prop_ind%d\t",k+1);
         fprintf(results_file,"\n");
         //data
         for(i=0;i<L;i++) {
             fprintf(results_file,"%f\t",lox[i]);
             for(k=0;k<popsize[popn_target];k++) {
-                fprintf(results_file,"%f\t",pop_iRESk[k][i]);
+                if(pop_iRESk[k][i] >= 0)
+                    fprintf(results_file,"%f\t",pop_iRESk[k][i]);
+                else
+                    fprintf(results_file,"-1\t"); /*fprintf(results_file,"NA\t");*/
             }
             fprintf(results_file,"\n");
         }
@@ -422,18 +425,18 @@ int main(int arg, const char *argv[])
         fprintf(results_file,"%f\t",lox[i]);
         for(j=0;j<npops;j++) {
             if(all_iES[j][i] > 0.0) fprintf(results_file,"%f\t",all_iES[j][i]);
-            else fprintf(results_file,"NA\t");
+            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iES[j][i] > 0.0) fprintf(results_file,"%f\t",log(all_iES[j][i]));
-            else fprintf(results_file,"NA\t");
+            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
         }
 
         l=0;
         for(j=0;j<npops-1;j++) {
             for(k=j+1;k<npops;k++) {
                 if(all_Rsb[l][i] != 1234567890) fprintf(results_file,"%f\t",all_Rsb[l][i]);
-                else fprintf(results_file,"NA\t");
+                else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
                 l++;
             }
         }
@@ -441,7 +444,7 @@ int main(int arg, const char *argv[])
         for(j=0;j<npops-1;j++) {
             for(k=j+1;k<npops;k++) {
                 if(all_Rsb[l][i] != 1234567890) fprintf(results_file,"%f\t",(all_Rsb[l][i]-median[l])/sd[l]);
-                else fprintf(results_file,"NA\t");
+                else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
                 l++;
             }
         }
@@ -510,7 +513,7 @@ int main(int arg, const char *argv[])
                         fprintf(results_file,"%f\t",lox[i]);
                         for(k=0;k<popsize[popn_target];k++) {
                             /*if(pop_Rsbk[ll][k][i] > 0.0)*/ fprintf(results_file,"%f\t",pop_Rsbk[ll][k][i]);
-                            //else fprintf(results_file,"NA\t");
+                            //else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
                         }
                         fprintf(results_file,"\n");
                     }
@@ -626,8 +629,15 @@ void usage()
 {
     printf(TANG_SOFTW);
     printf("\n\nUsage:");
-    printf("\nRsbki [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -starting from 1- (eg=1)] [size pop1] [size pop2] ... [size popN]");
-    printf("\n\nOutput file is automatically generated using the input filename plus '_Results_Tang.txt'");
+    printf("\nRsbki [calc derived (1/0)] [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -starting from 1- (eg=1)] [size pop1] [size pop2] ... [size popN]");
+    printf("\n\nOutput files are automatically generated using the input filename plus '_Results_Tang.txt'");
+    printf("\nThe number of output files are:");
+    printf("\n 1. file with extension '_imputed.txt' (imputed data)");
+    printf("\n 2. file with extension 'Results_Tang.txt' (iES statistics)");
+    printf("\n 3. (if npop>1) files with extension '_Results_Tang.txt_Significant_Results_RsbN' per pop comparison (Rsb (Normalized) statistic)");
+    printf("\n 4. file with extension '_Results_iESk_pop[POP_name].txt' (iESk statistics per position and individual)");
+    printf("\n 5. file with extension '_Results_log_iESk_pop[POP_name].txt' (iESk statistics per position and individual)");
+    printf("\n 6. (if npop>1) files with extension '_Results_Rsbk_TARGETpop[POPname]_versus_REFpop[POPname].txt' per pop comparison versus target pop (Rsbk statistics)");
     printf("\n\n");
 }
 
