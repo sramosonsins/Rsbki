@@ -629,8 +629,8 @@ void usage()
 {
     printf(TANG_SOFTW);
     printf("\n\nUsage:");
-    printf("\nRsbki [calc derived (1/0)] [Plink-like filename] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -starting from 1- (eg=1)] [size pop1] [size pop2] ... [size popN]");
-    printf("\n\nOutput files are automatically generated using the input filename plus '_Results_Tang.txt'");
+    printf("\nRsbki [genotype filename (one chrom)] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -first is 1- (eg=1)] [size pop1] [size pop2] ... [size popN]");
+    printf("\n\nOutput files are automatically generated using the input filename plus an extension");
     printf("\nThe number of output files are:");
     printf("\n 1. file with extension '_imputed.txt' (imputed data)");
     printf("\n 2. file with extension 'Results_Tang.txt' (iES statistics)");
