@@ -16,7 +16,8 @@ void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int 
     double *x;
     double *EHHa;
     double *EHHd;
-    double iESka,iESkd;
+    //double iESka;
+    double iESkd;
     double **iEHHak;
     double **iEHHdk;
     
@@ -40,35 +41,41 @@ void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int 
     EHHa = (double *)calloc(L,sizeof(double));
     EHHd = (double *)calloc(L,sizeof(double));
 
-    iESka = 0.0;
-    iESkd = 0.0;
     for(i=0;i<L-1;i++) {x[i] = lox[i+1] - lox[i];}
     for(i=0;i<L;i++) {
         calc_EHHak_EHHdk_pos(&i,geno,geno_rows, geno_cols,thresh,&min,&max, EHHa,EHHd,iEHHak,iEHHdk,pop_target );
-        for(j=min;j<max;j++) {
+        for(j=min;j<max;j++) { //max value at pos=i
             iESa[i] += (EHHa[j+1] + EHHa[j]) * x[j] / 2.0;
             iESd[i] += (EHHd[j+1] + EHHd[j]) * x[j] / 2.0;
+            EHHa[j] = EHHd[j] = 0.; //init for next
         }
+        EHHa[max] = EHHd[max] = 0.; //init for next
         if(pop_target) {
-            /**/double sumiESka=0.;
+            //double sumiESka=0.;
             /**/double sumiESkd=0.;
             for(k=0;k<*geno_cols;k++) {
-                for(j=min;j<max;j++) {
-                    iESka += (iEHHak[k][j+1] + iEHHak[k][j]) * x[j] / 2.0;
-                    iESkd += (iEHHdk[k][j+1] + iEHHdk[k][j]) * x[j] / 2.0;
-                }
-                /**/sumiESka += iESka;
-                /**/sumiESkd += iESkd;
-                if(iESka)
-                iRESk[k][i] = iESkd / (iESka + iESkd); // iESkd / iESka;
-                else iRESk[k][i] = -1;
-                iESka = 0.0;
+                //iESka = 0.0;
                 iESkd = 0.0;
+                for(j=min;j<max;j++) {
+                    //iESka += (iEHHak[k][j+1] + iEHHak[k][j]) * x[j] / 2.0;
+                    iESkd += (iEHHdk[k][j+1] + iEHHdk[k][j]) * x[j] / 2.0;
+                    //iEHHak[k][j] = 0;
+                    iEHHdk[k][j] = 0.; //init for next
+                }
+                //iEHHak[k][max] = 0;
+                iEHHdk[k][max] = 0.; //init for next
+                //sumiESka += iESka;
+                /**/sumiESkd += iESkd;
+                //if(iESka)
+                //if(iESka + iESkd)
+                if(iESa[i])
+                    iRESk[k][i] = iESkd / iESa[i];  //(iESka + iESkd); // iESkd / iESka;
+                else iRESk[k][i] = -1;
             }
-            /**/if(!(sumiESka >= (iESa[i] - 0.1) && sumiESka <= (iESa[i] + 0.1)))
-            /**/    printf("iESa and sumiESka are different\n");
-            /**/if(!(sumiESkd >= (iESd[i] - 0.1) && sumiESkd <= (iESd[i] + 0.1)))
-            /**/    printf("iESd and sumiESkd are different\n");
+            //if(!(sumiESka >= (iESa[i] - 0.1) && sumiESka <= (iESa[i] + 0.1)))
+            //    printf("iESa and sumiESka are different\n");
+            if(!(sumiESkd >= (iESd[i] - 0.1) && sumiESkd <= (iESd[i] + 0.1)))
+                printf("iESd and sumiESkd are different\n");
         }
     }
     free(x);

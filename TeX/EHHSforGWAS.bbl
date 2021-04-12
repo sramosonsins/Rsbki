@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{13}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{\sc Beissinger} {\em et~al.\/}(2018){\sc Beissinger}, {\sc Kruppa},
@@ -7,6 +7,11 @@
   M.~Erbe}, {\em et~al.\/}, 2018 A simple test identifies selection on complex
   traits.
 \newblock Genetics {\bf 209}: 321--333.
+
+\bibitem[{{\sc Benjamini} and {\sc Hochberg}(1995)}]{Benjamini:1995aa}
+{\sc Benjamini, Y.}, and {\sc Y.~Hochberg}, 1995 Controlling the false
+  discovery rate: a practical and powerful approach to multiple testing.
+\newblock Journal of the Royal Statistical Society Series B : 289--300.
 
 \bibitem[{{\sc Boyko} {\em et~al.\/}(2008){\sc Boyko}, {\sc Williamson}, {\sc
   Indap}, {\sc Degenhardt}, {\sc Hernandez} {\em et~al.\/}}]{Boyko:2008aa}
@@ -71,5 +76,13 @@
   Hill}, 1998 Bottleneck effect on genetic variance. a theoretical
   investigation of the role of dominance.
 \newblock Genetics {\bf 150}: 435--47.
+
+\bibitem[{{\sc Zeng} {\em et~al.\/}(2019){\sc Zeng}, {\sc Xue}, {\sc Jiang},
+  {\sc Lloyd-Jones}, {\sc Wu} {\em et~al.\/}}]{Zeng752527}
+{\sc Zeng, J.}, {\sc A.~Xue}, {\sc L.~Jiang}, {\sc L.~R. Lloyd-Jones}, {\sc
+  Y.~Wu}, {\em et~al.\/}, 2019 Bayesian analysis of gwas summary data reveals
+  differential signatures of natural selection across human complex traits and
+  functional genomic categories.
+\newblock bioRxiv .
 
 \end{thebibliography}
