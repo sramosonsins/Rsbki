@@ -17,6 +17,7 @@ int main(int arg, const char *argv[])
     int **pop_geno;
     int pop_geno_cols;
     double thresh;
+    double cut_freq; /*new jan23*/
     double **all_iES;
     double **pop_iESk;//new code
     double **all_iESa;//new code
@@ -75,22 +76,23 @@ int main(int arg, const char *argv[])
     geno_rows = L = atol(argv[2]);
     geno_cols = N = atoi(argv[3]);
     thresh = atof(argv[4]);
-    init_seed1(atol(argv[5]));
-    npops = atoi(argv[6]);
-    popn_target = atoi(argv[7]) - 1; //new code: note added 1 to next indexes in argv
+    cut_freq = atof(argv[5]);
+    init_seed1(atol(argv[6]));
+    npops = atoi(argv[7]);
+    popn_target = atoi(argv[8]) - 1; //new code: note added 1 to next indexes in argv
     if(popn_target<0) popn_target=0;
     popsize = (int *)calloc(npops,sizeof(int));
     //for(i=0;i<npops;i++) {
-    //    if(i!=npops-1) popsize[i] = atoi(argv[7+1+i+1]) - atoi(argv[7+1+i]);
-    //    else popsize[i] = (N+2+1) - atoi(argv[7+1+i]);
+    //    if(i!=npops-1) popsize[i] = atoi(argv[8+1+i+1]) - atoi(argv[8+1+i]);
+    //    else popsize[i] = (N+2+1) - atoi(argv[8+1+i]);
     //}
     for(i=0;i<npops;i++) {
-        popsize[i] = atoi(argv[7+1+i]);
+        popsize[i] = atoi(argv[8+1+i]);
     }
     pop_name = (char **)calloc(npops,sizeof(char *));
     for(i=0;i<npops;i++) {
         pop_name[i] = (char *)calloc(100,sizeof(char));
-        strcpy(pop_name[i], argv[7+1+npops+i]);
+        strcpy(pop_name[i], argv[8+1+npops+i]);
     }
  
     if (!(plink_file = fopen(file_in,"r"))) {
@@ -98,7 +100,7 @@ int main(int arg, const char *argv[])
         exit(1);
     }
     
-    //geno is transposed to facilitate the analysis
+    //geno will be transposed to facilitate the analysis
     geno = (int **)calloc(N,sizeof(int *));
     for(j=0;j<N;j++) {geno[j] = (int *)calloc(L,sizeof(int));}
     lox = (double *)calloc(L,sizeof(double));
@@ -159,6 +161,8 @@ int main(int arg, const char *argv[])
     //imputation
     printf("\nimputing missing values (previously assigned as genotype=9)...\n"); fflush(stdout);
     impute_genotypes(geno, L, geno_cols);
+    printf("\nfiltering frequencies under %.3f...\n",cut_freq); fflush(stdout);
+    cut_low_freqs(geno,L,geno_cols,cut_freq); /*new function Jan23*/
 
     //writing imputed file
     memset(file_out, '\0', 1024);
@@ -629,7 +633,7 @@ void usage()
 {
     printf(TANG_SOFTW);
     printf("\n\nUsage:");
-    printf("\nRsbki [genotype filename (one chrom)] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -first is 1- (eg=1)] [size pop1] [size pop2] ... [size popN]");
+    printf("\nRsbki [genotype filename (one chrom)] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [freq_cut (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -first is 1- (eg=1)] [size pop1] [size pop2] ... [size popN] [name pop1] ... [name popN]");
     printf("\n\nOutput files are automatically generated using the input filename plus an extension");
     printf("\nThe number of output files are:");
     printf("\n 1. file with extension '_imputed.txt' (imputed data)");

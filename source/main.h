@@ -8,9 +8,9 @@
 //#ifndef main_h
 #define main_h
 
-#define TANG_SOFTW  "\nSoftware for calculating iES plus Rsb and iESk plus Rsbk (per individual) statistics." \
-"\nfollowing Tang, Thornton & Stoneking, PloS Biology 2007." \
-"\nversion 20210226"
+#define TANG_SOFTW  "\nSoftware for calculating iES plus Rsb and iESk plus Rsbk (dividing per individual) statistics." \
+"\nbased on initial statistics from Tang, Thornton & Stoneking, PloS Biology 2007." \
+"\nversion 20230124"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +21,8 @@
 int read_row(FILE *plink_file,char *chr_name, double *lox, int **geno, int geno_cols, long int row);
 
 void impute_genotypes(int **geno, long int geno_rows, int geno_cols);
+
+void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq);
 
 void usage(void);
 
