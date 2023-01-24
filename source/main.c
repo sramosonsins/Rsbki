@@ -161,8 +161,8 @@ int main(int arg, const char *argv[])
     //imputation
     printf("\nimputing missing values (previously assigned as genotype=9)...\n"); fflush(stdout);
     impute_genotypes(geno, L, geno_cols);
-    printf("\nfiltering frequencies under %.3f...\n",cut_freq); fflush(stdout);
-    cut_low_freqs(geno,L,geno_cols,cut_freq); /*new function Jan23*/
+    printf("\nfiltering frequencies under %.3f per pop...\n",cut_freq); fflush(stdout);
+    cut_low_freqs(geno,L,geno_cols,cut_freq, npops, popsize); /*new function Jan23*/
 
     //writing imputed file
     memset(file_out, '\0', 1024);

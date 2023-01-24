@@ -22,7 +22,7 @@ int read_row(FILE *plink_file,char *chr_name, double *lox, int **geno, int geno_
 
 void impute_genotypes(int **geno, long int geno_rows, int geno_cols);
 
-void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq);
+void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq, int npops, int *popsize);
 
 void usage(void);
 

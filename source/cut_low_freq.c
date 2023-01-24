@@ -6,23 +6,26 @@
 //  Copyright © 2023 CRAG. All rights reserved.
 //
 
-void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq) /*TO DO !!!!!*/
+void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq, int npops, int *popsize)
 {
-    int j;
+    int j,k,l;
     long int i;
     double freq,sum_tot;
     
     for(i=0;i<geno_rows;i++) {
-        freq = sum_tot = 0.;
-        for(j=0;j<geno_cols;j++) {
-            if(geno[j][i] != 9) {
-                freq += (double)geno[j][i];
-                sum_tot += 2.;
+        for(k=0;k<npops;k++) {
+            l = 0; freq = sum_tot = 0.;
+            if(k>0) l += popsize[k-1];
+            for(j=0;j<popsize[k];j++) {
+                if(geno[j+l][i] != 9) {
+                    freq += (double)geno[j+l][i];
+                    sum_tot += 2.;
+                }
             }
-        }
-        if(sum_tot > 0. && freq/sum_tot < cut_freq) {
-            for(j=0;j<geno_cols;j++) {
-                geno[j][i] = 0; /*eliminate variant under cut_freq*/
+            if(sum_tot > 0. && freq/sum_tot < cut_freq) {
+                for(j=0;j<popsize[k];j++) {
+                    geno[j+l][i] = 0; /*eliminate variant under cut_freq*/
+                }
             }
         }
     }
