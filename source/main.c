@@ -629,11 +629,11 @@ int compare_(const void *i,const void *j)
     return 0;
 }
 
-void usage()
+void usage(void)
 {
     printf(TANG_SOFTW);
     printf("\n\nUsage:");
-    printf("\nRsbki [genotype filename (one chrom)] [number of SNPs] [number of indiv] [threshold value (eg=0.1)] [freq_cut (eg=0.1)] [seed (eg=123456)] [number pops] [number target pop -first is 1- (eg=1)] [size pop1] [size pop2] ... [size popN] [name pop1] ... [name popN]");
+    printf("\nRsbki [genotype filename (one chrom)] [number of SNPs] [number of indiv] [EHH threshold value (eg=0.1)] maf_cut (eg=0.05)] [seed (eg=123456)] [number pops] [number target pop -first is 1- (eg=1)] [size pop1] [size pop2] ... [size popN] [name pop1] ... [name popN]");
     printf("\n\nOutput files are automatically generated using the input filename plus an extension");
     printf("\nThe number of output files are:");
     printf("\n 1. file with extension '_imputed.txt' (imputed data)");

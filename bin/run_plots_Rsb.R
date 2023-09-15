@@ -2,7 +2,7 @@
 
 args = commandArgs(trailingOnly=TRUE)
 
-#if (!require("data.table")) install.packages("data.table")
+if (!require("data.table")) install.packages("data.table")
 library("data.table")
 if (length(args) < 4 ){
   system("echo Error: Arguments are: [filename] [times difference between pops] [number of pops] [name pop1] ... [name pop n]")
