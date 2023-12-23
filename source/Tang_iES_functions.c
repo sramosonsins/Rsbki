@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iES, double **iESk,int pop_target)
+void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iES, double **iESk,int pop_target, long int *erased_rows, long int n_erased_rows)
 {
     void calc_EHHS_Ikij_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max, double *EHH, double **Ikij, int pop_target);
     
@@ -22,7 +22,7 @@ void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_
     //end
     
     long int L;
-    long int i,j,k;
+    long int i,j,k,jj;
     long int min,max;
     
     //double sumiESk;
@@ -44,7 +44,9 @@ void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_
     EHHSa = (double *)calloc(L,sizeof(double));
     
     for(i=0;i<L-1;i++) {x[i] = lox[i+1] - lox[i];}
+    jj=0;
     for(i=0;i<L;i++) {
+        if(i<=erased_rows[n_erased_rows-1] && erased_rows[jj]==i) {jj++;continue;} //new code2
         calc_EHHS_Ikij_pos(&i,geno,geno_rows,geno_cols,thresh,&min,&max,EHHSa,Ikij,pop_target); //new function
         //for(j=min;j<max;j++) {
         //    y[j] = EHHSa[j+1] + EHHSa[j];

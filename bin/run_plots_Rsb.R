@@ -24,7 +24,7 @@ if (length(args) < 4 ){
 data_stats <- data.frame(fread(filename, header=T))
 bp <- data_stats[,1]#/1000000
 
-pdf(sprintf("%s_Results_Rsb.pdf",filename), width=12, height=6)
+pdf(sprintf("%s_Results_RsbN.pdf",filename), width=12, height=6)
 k <- 1
 for(i in 1:(npops-1)) {
   for(j in (i+1):(npops)) {
@@ -38,7 +38,7 @@ for(i in 1:(npops-1)) {
     if(length(lnRsb[,2])) {
       plot (lnRsb[lnRsb[,2]>=0,1],lnRsb[lnRsb[,2]>=0,2], 
             col="green", main=sprintf("Rsb along chromosome: %s vs %s",namepops[i],namepops[j]), 
-            xlab="Chromosome Position bp", ylab="ln(Rsb)",pch=10, type="p",cex=.2, 
+            xlab="Chromosome Position bp", ylab="ln(RsbN)",pch=10, type="p",cex=.2, 
             ylim=c(min(lnRsb[,2]),max(lnRsb[,2])), xlim=c(min(lnRsb[,1]),max(lnRsb[,1])))
       lines(lnRsb[lnRsb[,2]<0,1] ,lnRsb[lnRsb[,2]<0,2] , col="red"  ,pch=10, type="p",cex=.2)
       abline(h=0, col=1)

@@ -10,7 +10,7 @@
 
 #define TANG_SOFTW  "\nSoftware for calculating iES plus Rsb and iESk plus Rsbk (dividing per individual) statistics." \
 "\nbased on initial statistics from Tang, Thornton & Stoneking, PloS Biology 2007." \
-"\nversion 20230915"
+"\nversion 20231223"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,15 +22,15 @@ int read_row(FILE *plink_file,char *chr_name, double *lox, int **geno, int geno_
 
 void impute_genotypes(int **geno, long int geno_rows, int geno_cols);
 
-void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq, int npops, int *popsize);
+void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_freq, int npops, int *popsize, long int *erased_rows, long int *n_erased_rows);
 
 void usage(void);
 
-void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iES, double **iESk, int pop_target);
+void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iES, double **iESk, int pop_target, long int *erased_rows, long int n_erased_rows);
 
 //void calc_EHHS_Ikij_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max, double *EHH, int **Ikij, int pop_target);
 
-void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iESa, double *iESd, double **iRESk,int pop_target);
+void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iESa, double *iESd, double **iRESk,int pop_target, long int *erased_rows, long int n_erased_rows);
 
 //void calc_EHHak_EHHdk_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max. double *iEHHa, double *iEHHd, double **iEHHak, double **iEHHdk, int pop_target);
 

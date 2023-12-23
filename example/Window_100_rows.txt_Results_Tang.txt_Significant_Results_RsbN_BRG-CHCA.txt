@@ -1,2 +1,0 @@
-bp	data_stats...col_RsbN...k.
-87801	7.837146

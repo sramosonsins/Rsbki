@@ -11,10 +11,10 @@
 int main(int arg, const char *argv[])
 {
     double *lox;
+    double *lox_;
     int **geno;
-    long int geno_rows;
-    int geno_cols;
-    int **pop_geno;
+    int **geno_;
+     int **pop_geno;
     int pop_geno_cols;
     double thresh;
     double cut_freq; /*new jan23*/
@@ -23,9 +23,9 @@ int main(int arg, const char *argv[])
     double **all_iESa;//new code
     double **all_iESd;//new code
     double **pop_iRESk;//new code
-    long int L;
+    long int L,L_;
     int N;
-    long int i,h;
+    long int i,ii,h;
     int j,k,l,ll,jj;
     int npops;
     int *popsize;
@@ -46,6 +46,8 @@ int main(int arg, const char *argv[])
     double ***pop_Rsbk;//new code
     long int *nit;
     char **pop_name;
+    long int *erased_rows;//new code2
+    long int n_erased_rows=0;//new code2
 
     FILE *plink_file = 0;
     FILE *genot_file = 0;
@@ -73,8 +75,8 @@ int main(int arg, const char *argv[])
     
     //define variables and arrays:
     strcpy( file_in, argv[1]);
-    geno_rows = L = atol(argv[2]);
-    geno_cols = N = atoi(argv[3]);
+    L_ = atol(argv[2]);
+    N = atoi(argv[3]);
     thresh = atof(argv[4]);
     cut_freq = atof(argv[5]);
     init_seed1(atol(argv[6]));
@@ -100,10 +102,48 @@ int main(int arg, const char *argv[])
         exit(1);
     }
     
-    //geno will be transposed to facilitate the analysis
+    //init: geno will be transposed to facilitate the analysis
+    geno_ = (int **)calloc(N,sizeof(int *));
+    for(j=0;j<N;j++) {geno_[j] = (int *)calloc(L_,sizeof(int));}
+    lox_ = (double *)calloc(L_,sizeof(double));
+    erased_rows = (long int *)calloc(L_,sizeof(long int));
+
+    //read input data: skip header
+    printf("\nReading input file..."); fflush(stdout);
+    while((c=getc(plink_file))!='\n' && c!='\r');
+    row = 0;
+    for(row=0;row<L_;row++) {
+        if((c = read_row(plink_file,chr_name,lox_,geno_,N,row))==0) {
+            printf("\nError: input file has less rows or more cols than defined. nrows: %ld\n",row+1);
+            exit(1);
+        }
+    }
+    fclose(plink_file);
+    
+    //imputation
+    printf("\nimputing missing values (previously assigned as genotype=9)...\n"); fflush(stdout);
+    impute_genotypes(geno_, L_, N);
+    //filtering low frequencies
+    printf("\nfiltering frequencies under %.3f per pop...\n",cut_freq); fflush(stdout);
+    cut_low_freqs(geno_,L_,N,cut_freq, npops, popsize, erased_rows, &n_erased_rows); /*new function Jan23*/
+    //create a new matrix geno: erasing low frequency positions:
+    L = L_ - n_erased_rows;
+    lox = (double *)calloc(L,sizeof(double));
     geno = (int **)calloc(N,sizeof(int *));
     for(j=0;j<N;j++) {geno[j] = (int *)calloc(L,sizeof(int));}
-    lox = (double *)calloc(L,sizeof(double));
+    ii=0;
+    for(i=0;i<L_;i++) {
+        //if(i<=erased_rows[n_erased_rows-1] && erased_rows[ii]==i) {ii++;continue;} //new code2
+        lox[i-ii]=lox_[i];
+        for(j=0;j<N;j++) {
+            geno[j][i-ii]=geno_[j][i];
+        }
+    }
+    //erasing original geno_ and lox_
+    for(j=0;j<N;j++) {free(geno_[j]);}free(geno_);
+    free(lox_);
+    
+    //defining matrix and vectors
     all_iES = (double **)calloc(npops,sizeof(double *));
     for(i=0;i<npops;i++) {all_iES[i] = (double *)calloc(L,sizeof(double));}
     //new code
@@ -146,24 +186,6 @@ int main(int arg, const char *argv[])
     }
     //end
 
-    //read input data: skip header
-    printf("\nReading input file..."); fflush(stdout);
-    while((c=getc(plink_file))!='\n' && c!='\r');
-    row = 0;
-    for(row=0;row<L;row++) {
-        if((c = read_row(plink_file,chr_name,lox,geno,geno_cols,row))==0) {
-            printf("\nError: input file has less rows or more cols than defined. nrows: %ld\n",row+1);
-            exit(1);
-        }
-    }
-    fclose(plink_file);
-    
-    //imputation
-    printf("\nimputing missing values (previously assigned as genotype=9)...\n"); fflush(stdout);
-    impute_genotypes(geno, L, geno_cols);
-    printf("\nfiltering frequencies under %.3f per pop...\n",cut_freq); fflush(stdout);
-    cut_low_freqs(geno,L,geno_cols,cut_freq, npops, popsize); /*new function Jan23*/
-
     //writing imputed file
     memset(file_out, '\0', 1024);
     strcat(file_out,file_in);
@@ -199,14 +221,14 @@ int main(int arg, const char *argv[])
         fflush(stdout);
         pop_geno_cols = popsize[j];
         pop_geno = &geno[popcum];
-        calc_iRESda_iRESdak_slow(pop_geno, lox, &geno_rows, &pop_geno_cols, &thresh, all_iESa[j], all_iESd[j], pop_iRESk,(j==popn_target));
+        calc_iRESda_iRESdak_slow(pop_geno, lox, &L, &pop_geno_cols, &thresh, all_iESa[j], all_iESd[j], pop_iRESk,(j==popn_target));
         popcum += popsize[j];
     }
 
     //calculation iRES: later calculate median, mean and sd:
     printf("\nComputing iRESda and iRESdak..."); fflush(stdout);
     for(i=0;i<L;i++) {
-        for(j=0;j<npops;j++) {
+         for(j=0;j<npops;j++) {
             if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0) {
                 all_iRES[j][i] = log(all_iESd[j][i])-log(all_iESa[j][i]);
                 mean_res[j] = mean_res[j] + all_iRES[j][i];
@@ -265,20 +287,20 @@ int main(int arg, const char *argv[])
         for(j=0;j<npops;j++) {
             if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0)
                 fprintf(results_file,"%f\t%f\t",all_iESd[j][i],all_iESa[j][i]);
-            else fprintf(results_file,"-1\t-1\t"); /*else fprintf(results_file,"NA\tNA\t");*/
+            else fprintf(results_file,"NA\tNA\t"); /*else fprintf(results_file,"NA\tNA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iESa[j][i] > 0.0 && all_iESd[j][i] > 0.0)
                 fprintf(results_file,"%f\t%f\t",log(all_iESd[j][i]),log(all_iESa[j][i]));
-            else fprintf(results_file,"-1\t-1\t"); /*else fprintf(results_file,"NA\tNA\t");*/
+            else fprintf(results_file,"NA\tNA\t"); /*else fprintf(results_file,"NA\tNA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iRES[j][i] != 1234567890) fprintf(results_file,"%f\t",all_iRES[j][i]);
-            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+            else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iRES[j][i] != 1234567890) fprintf(results_file,"%f\t",(all_iRES[j][i]-median_res[j])/sd_res[j]);
-            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+            else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
         }
         fprintf(results_file,"\n");
     }
@@ -308,7 +330,7 @@ int main(int arg, const char *argv[])
                 if(pop_iRESk[k][i] >= 0)
                     fprintf(results_file,"%f\t",pop_iRESk[k][i]);
                 else
-                    fprintf(results_file,"-1\t"); /*fprintf(results_file,"NA\t");*/
+                    fprintf(results_file,"NA\t"); /*fprintf(results_file,"NA\t");*/
             }
             fprintf(results_file,"\n");
         }
@@ -333,7 +355,7 @@ int main(int arg, const char *argv[])
         //end
         pop_geno_cols = popsize[j];
         pop_geno = &geno[popcum];
-        calc_iES_iESk_slow(pop_geno, lox, &geno_rows, &pop_geno_cols, &thresh, all_iES[j],pop_iESk,(j==popn_target)); //new code
+        calc_iES_iESk_slow(pop_geno, lox, &L, &pop_geno_cols, &thresh, all_iES[j],pop_iESk,(j==popn_target)); //new code
         popcum += popsize[j];
     }
     
@@ -429,18 +451,18 @@ int main(int arg, const char *argv[])
         fprintf(results_file,"%f\t",lox[i]);
         for(j=0;j<npops;j++) {
             if(all_iES[j][i] > 0.0) fprintf(results_file,"%f\t",all_iES[j][i]);
-            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+            else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
         }
         for(j=0;j<npops;j++) {
             if(all_iES[j][i] > 0.0) fprintf(results_file,"%f\t",log(all_iES[j][i]));
-            else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+            else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
         }
 
         l=0;
         for(j=0;j<npops-1;j++) {
             for(k=j+1;k<npops;k++) {
                 if(all_Rsb[l][i] != 1234567890) fprintf(results_file,"%f\t",all_Rsb[l][i]);
-                else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+                else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
                 l++;
             }
         }
@@ -448,7 +470,7 @@ int main(int arg, const char *argv[])
         for(j=0;j<npops-1;j++) {
             for(k=j+1;k<npops;k++) {
                 if(all_Rsb[l][i] != 1234567890) fprintf(results_file,"%f\t",(all_Rsb[l][i]-median[l])/sd[l]);
-                else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+                else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
                 l++;
             }
         }
@@ -517,7 +539,7 @@ int main(int arg, const char *argv[])
                         fprintf(results_file,"%f\t",lox[i]);
                         for(k=0;k<popsize[popn_target];k++) {
                             /*if(pop_Rsbk[ll][k][i] > 0.0)*/ fprintf(results_file,"%f\t",pop_Rsbk[ll][k][i]);
-                            //else fprintf(results_file,"-1\t"); /*else fprintf(results_file,"NA\t");*/
+                            //else fprintf(results_file,"NA\t"); /*else fprintf(results_file,"NA\t");*/
                         }
                         fprintf(results_file,"\n");
                     }
@@ -566,6 +588,7 @@ int main(int arg, const char *argv[])
         free(geno[j]);
     }
     free(geno);
+    free(erased_rows);
     printf("\ndone\n");
     exit(0);
 }
@@ -637,8 +660,8 @@ void usage(void)
     printf("\n\nOutput files are automatically generated using the input filename plus an extension");
     printf("\nThe number of output files are:");
     printf("\n 1. file with extension '_imputed.txt' (imputed data)");
-    printf("\n 2. file with extension 'Results_Tang.txt' (iES statistics)");
-    printf("\n 3. (if npop>1) files with extension '_Results_Tang.txt_Significant_Results_RsbN' per pop comparison (Rsb (Normalized) statistic)");
+    printf("\n 2. file with extension '_Results_Tang.txt' (iES, Rsb and RsbN statistics per position and pop comparison)");
+    printf("\n 3. file with extension '_Results_iESd_iESa_iRES_pop.txt' (iESd and iESa statistics per position and population)");
     printf("\n 4. file with extension '_Results_iESk_pop[POP_name].txt' (iESk statistics per position and individual)");
     printf("\n 5. file with extension '_Results_log_iESk_pop[POP_name].txt' (iESk statistics per position and individual)");
     printf("\n 6. (if npop>1) files with extension '_Results_Rsbk_TARGETpop[POPname]_versus_REFpop[POPname].txt' per pop comparison versus target pop (Rsbk statistics)");
