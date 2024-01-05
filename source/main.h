@@ -26,11 +26,11 @@ void cut_low_freqs(int **geno, long int geno_rows, int geno_cols, double cut_fre
 
 void usage(void);
 
-void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iES, double **iESk, int pop_target, long int *erased_rows, long int n_erased_rows);
+void calc_iES_iESk_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iES, double **iESk, int pop_target);
 
 //void calc_EHHS_Ikij_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max, double *EHH, int **Ikij, int pop_target);
 
-void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iESa, double *iESd, double **iRESk,int pop_target, long int *erased_rows, long int n_erased_rows);
+void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iESa, double *iESd, double **iRESk,int pop_target);
 
 //void calc_EHHak_EHHdk_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max. double *iEHHa, double *iEHHd, double **iEHHak, double **iEHHdk, int pop_target);
 

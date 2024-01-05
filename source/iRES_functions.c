@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iESa, double *iESd, double **iRESk,int pop_target, long int *erased_rows, long int n_erased_rows)
+void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int *geno_cols, double *thresh, double *iESa, double *iESd, double **iRESk,int pop_target)
 {
     void calc_EHHak_EHHdk_pos(long int *i, int **geno, long int *geno_rows, int *geno_cols, double *thresh, long int *min, long int *max, double *iEHHa, double *iEHHd, double **iEHHak, double **iEHHdk, int pop_target);
     
@@ -22,7 +22,7 @@ void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int 
     double **iEHHdk;
     
     long int L;
-    long int i,j,k,jj;
+    long int i,j,k;
     long int min,max;
     
     L = *geno_rows;
@@ -42,9 +42,7 @@ void calc_iRESda_iRESdak_slow(int **geno, double *lox, long int *geno_rows, int 
     EHHd = (double *)calloc(L,sizeof(double));
 
     for(i=0;i<L-1;i++) {x[i] = lox[i+1] - lox[i];}
-    jj=0;
     for(i=0;i<L;i++) {
-        if(i<=erased_rows[n_erased_rows-1] && erased_rows[jj]==i) {jj++;continue;} //new code2
         calc_EHHak_EHHdk_pos(&i,geno,geno_rows, geno_cols,thresh,&min,&max, EHHa,EHHd,iEHHak,iEHHdk,pop_target );
         for(j=min;j<max;j++) { //max value at pos=i
             iESa[i] += (EHHa[j+1] + EHHa[j]) * x[j] / 2.0;
