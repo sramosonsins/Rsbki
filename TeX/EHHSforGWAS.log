@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.9)  15 SEP 2023 13:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.9)  20 MAY 2025 18:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -322,82 +322,44 @@ Overfull \hbox (10.56592pt too wide) in paragraph at lines 60--62
 prox-i-mately from some dozens
  []
 
-[3] [4] [5] [6] [7] [8] [9] [10]
+[3] [4] [5] [6] [7] [8] [9]
+<./Example_EHHstatsGWAS.pdf, id=44, 1927.2pt x 1084.05pt>
+File: ./Example_EHHstatsGWAS.pdf Graphic file (type pdf)
+<use ./Example_EHHstatsGWAS.pdf>
+Package pdftex.def Info: ./Example_EHHstatsGWAS.pdf  used on input line 234.
+(pdftex.def)             Requested size: 385.43318pt x 216.80615pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[11] [12] (./EHHSforGWAS.bbl [13]) [14]
-<./GammBiv_EW_plot_Fig1.pdf, id=60, 505.89pt x 505.89pt>
-File: ./GammBiv_EW_plot_Fig1.pdf Graphic file (type pdf)
-<use ./GammBiv_EW_plot_Fig1.pdf>
-Package pdftex.def Info: ./GammBiv_EW_plot_Fig1.pdf  used on input line 238.
-(pdftex.def)             Requested size: 379.41655pt x 379.41655pt.
-
-Overfull \hbox (19.41655pt too wide) in paragraph at lines 238--239
+Overfull \hbox (25.43318pt too wide) in paragraph at lines 234--235
 [][] 
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<./Dist_ALLScenarios1.pdf, id=61, 722.7pt x 1084.05pt>
-File: ./Dist_ALLScenarios1.pdf Graphic file (type pdf)
-<use ./Dist_ALLScenarios1.pdf>
-Package pdftex.def Info: ./Dist_ALLScenarios1.pdf  used on input line 245.
-(pdftex.def)             Requested size: 325.21199pt x 487.818pt.
-
-LaTeX Warning: Float too large for page by 24.41779pt on input line 249.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<./Dist_ALLScenarios2.pdf, id=62, 722.7pt x 1084.05pt>
-File: ./Dist_ALLScenarios2.pdf Graphic file (type pdf)
-<use ./Dist_ALLScenarios2.pdf>
-Package pdftex.def Info: ./Dist_ALLScenarios2.pdf  used on input line 252.
-(pdftex.def)             Requested size: 325.21199pt x 487.818pt.
-
-LaTeX Warning: Float too large for page by 24.41779pt on input line 256.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<./Dist_ALLScenarios3.pdf, id=63, 719.3271pt x 539.69708pt>
-File: ./Dist_ALLScenarios3.pdf Graphic file (type pdf)
-<use ./Dist_ALLScenarios3.pdf>
-Package pdftex.def Info: ./Dist_ALLScenarios3.pdf  used on input line 259.
-(pdftex.def)             Requested size: 323.6942pt x 242.86143pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[15 <./GammBiv_EW_plot_Fig1.pdf>] [16 <./Dist_ALLScenarios1.pdf>] [17 <./Dist_A
-LLScenarios2.pdf>] [18 <./Dist_ALLScenarios3.pdf>] (./EHHSforGWAS.aux) ) 
+(./EHHSforGWAS.bbl [10 <./Example_EHHstatsGWAS.pdf>] [11]) [12]
+(./EHHSforGWAS.aux) ) 
 Here is how much of TeX's memory you used:
- 6355 strings out of 476025
- 94284 string characters out of 5790018
- 1863388 words of memory out of 5000000
- 26682 multiletter control sequences out of 15000+600000
+ 6330 strings out of 476025
+ 93563 string characters out of 5790018
+ 1857388 words of memory out of 5000000
+ 26660 multiletter control sequences out of 15000+600000
  551885 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,17n,67p,1809b,248s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/l
-ocal/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/lo
-cal/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/loc
-al/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local
-/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
-exlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
-live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
-e/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
-23/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2023
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/t
-exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/
-fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type
-1/urw/times/utmri8a.pfb>
-Output written on EHHSforGWAS.pdf (18 pages, 2955494 bytes).
+ 60i,17n,67p,1809b,243s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/lo
+cal/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texliv
+e/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on EHHSforGWAS.pdf (12 pages, 1365211 bytes).
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
+ 169 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
